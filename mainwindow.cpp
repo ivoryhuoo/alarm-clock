@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "setalarmwindow.h"
+#include "viewAlarm.h"
 #include <QDebug> // Needed for qDebug()
-
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QWidget *centralWidget = new QWidget(this);
@@ -10,12 +10,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     clockWidget = new ClockWidget(this);
     setAlarmButton = new QPushButton("Set Alarm", this);
     viewAlarmsButton = new QPushButton("View Alarms", this);
+    viewAlarmWindow = nullptr; // Initialize pointer to null
 
     layout->addWidget(clockWidget);
     layout->addWidget(setAlarmButton);
     layout->addWidget(viewAlarmsButton);
 
     connect(setAlarmButton, &QPushButton::clicked, this, &MainWindow::openSetAlarm);
+    connect(viewAlarmsButton, &QPushButton::clicked, this, &MainWindow::openViewAlarms); // Connect button
 
     setCentralWidget(centralWidget);
 }
@@ -34,7 +36,11 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
 }
 
 void MainWindow::openViewAlarms() {
-    qDebug() << "View Alarms button clicked!";  // Placeholder, you can add UI later
+    qDebug() << "View Alarms button clicked!";
+
+    // Prevent multiple windows from opening
+    if (!viewAlarmWindow) {
+        viewAlarmWindow = new ViewAlarm(this);
+    }
+    viewAlarmWindow->show();
 }
-
-

@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include "clockwidget.h"
+#include "setalarmwindow.h"
+#include "viewAlarm.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -15,13 +17,13 @@ public:
 private slots:
     void openSetAlarm();
     void openViewAlarms();
-    void handleAlarmSet(QTime time, QString repeat, QString label, QString sound); 
+    void handleAlarmSet(QTime time, QString repeat, QString label, QString sound);
 
 private:
     ClockWidget *clockWidget;
     QPushButton *setAlarmButton;
     QPushButton *viewAlarmsButton;
-    QList<QTime> alarms;
+    ViewAlarm *viewAlarmWindow; // Pointer to the ViewAlarm window
 };
 
 #endif // MAINWINDOW_H
