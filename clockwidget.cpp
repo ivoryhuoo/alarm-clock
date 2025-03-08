@@ -13,6 +13,7 @@ ClockWidget::ClockWidget(QWidget *parent) : QWidget(parent) {
     updateTime();
 }
 
+
 void ClockWidget::updateTime() {
     clockDisplay->display(QTime::currentTime().toString("hh:mm:ss"));
 }

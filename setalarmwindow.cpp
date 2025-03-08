@@ -1,6 +1,8 @@
 #include "setalarmwindow.h"
 
 SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
+    setWindowTitle("Set Alarm");
+    
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     timeEdit = new QTimeEdit(this);
