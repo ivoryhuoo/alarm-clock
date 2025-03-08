@@ -23,7 +23,11 @@ private:
     ClockWidget *clockWidget;
     QPushButton *setAlarmButton;
     QPushButton *viewAlarmsButton;
-    ViewAlarm *viewAlarmWindow; // Pointer to the ViewAlarm window
+    ViewAlarm *viewAlarmWindow;
+
+    QList<QTime> alarms;  // Store alarm times
+    QList<QString> alarmLabels;  // Store alarm labels
 };
 
 #endif // MAINWINDOW_H
+
