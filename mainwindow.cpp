@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "setalarmwindow.h"
 #include "viewAlarm.h"
-#include <QDebug> // Needed for qDebug()
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QWidget *centralWidget = new QWidget(this);
@@ -10,14 +10,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     clockWidget = new ClockWidget(this);
     setAlarmButton = new QPushButton("Set Alarm", this);
     viewAlarmsButton = new QPushButton("View Alarms", this);
-    viewAlarmWindow = nullptr; // Initialize pointer to null
+    viewAlarmWindow = nullptr;
 
     layout->addWidget(clockWidget);
     layout->addWidget(setAlarmButton);
     layout->addWidget(viewAlarmsButton);
 
     connect(setAlarmButton, &QPushButton::clicked, this, &MainWindow::openSetAlarm);
-    connect(viewAlarmsButton, &QPushButton::clicked, this, &MainWindow::openViewAlarms); // Connect button
+    connect(viewAlarmsButton, &QPushButton::clicked, this, &MainWindow::openViewAlarms);
 
     setCentralWidget(centralWidget);
 }
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 void MainWindow::openSetAlarm() {
     SetAlarmWindow *setAlarmDialog = new SetAlarmWindow(this);
     connect(setAlarmDialog, &SetAlarmWindow::alarmSet, this, &MainWindow::handleAlarmSet);
-    setAlarmDialog->exec(); // Open as a modal dialog
+    setAlarmDialog->exec();
 }
 
 void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QString sound) {
@@ -33,14 +33,22 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
              << "| Repeat:" << repeat
              << "| Label:" << label
              << "| Sound:" << sound;
+
+    alarms.append(time);
+    alarmLabels.append(label);
+
+    if (viewAlarmWindow) {
+        viewAlarmWindow->updateAlarmList(alarms, alarmLabels);
+    }
 }
 
 void MainWindow::openViewAlarms() {
     qDebug() << "View Alarms button clicked!";
 
-    // Prevent multiple windows from opening
     if (!viewAlarmWindow) {
         viewAlarmWindow = new ViewAlarm(this);
     }
+
+    viewAlarmWindow->updateAlarmList(alarms, alarmLabels); // Update with latest alarms
     viewAlarmWindow->show();
 }
