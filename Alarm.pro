@@ -4,9 +4,11 @@ CONFIG -= app_bundle
 
 SOURCES += main.cpp \
            clockwidget.cpp \
-           mainwindow.cpp 
+           mainwindow.cpp \
+           setalarmwindow.cpp
 
 HEADERS += clockwidget.h \
-           mainwindow.h
+           mainwindow.h \
+           setalarmwindow.h
 
 # RESOURCES += resources.qrc

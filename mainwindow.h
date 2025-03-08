@@ -15,11 +15,13 @@ public:
 private slots:
     void openSetAlarm();
     void openViewAlarms();
+    void handleAlarmSet(QTime time);
 
 private:
     ClockWidget *clockWidget;
     QPushButton *setAlarmButton;
     QPushButton *viewAlarmsButton;
+    QList<QTime> alarms;
 };
 
 #endif // MAINWINDOW_H

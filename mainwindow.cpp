@@ -1,4 +1,7 @@
 #include "mainwindow.h"
+#include "setalarmwindow.h"
+#include <QDebug> // Needed for qDebug()
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QWidget *centralWidget = new QWidget(this);
@@ -13,15 +16,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     layout->addWidget(viewAlarmsButton);
 
     connect(setAlarmButton, &QPushButton::clicked, this, &MainWindow::openSetAlarm);
-    connect(viewAlarmsButton, &QPushButton::clicked, this, &MainWindow::openViewAlarms);
 
     setCentralWidget(centralWidget);
 }
 
 void MainWindow::openSetAlarm() {
-    // Placeholder function for setting alarms
+    SetAlarmWindow *setAlarmDialog = new SetAlarmWindow(this);
+    connect(setAlarmDialog, &SetAlarmWindow::alarmSet, this, &MainWindow::handleAlarmSet);
+    setAlarmDialog->exec(); // Open as a modal dialog
+}
+
+void MainWindow::handleAlarmSet(QTime time) {
+    alarms.append(time); // Store the alarm
+    qDebug().nospace() << "Alarm set for: " << time.toString("HH:mm");
 }
 
 void MainWindow::openViewAlarms() {
-    // Placeholder function for viewing alarms
+    qDebug() << "View Alarms button clicked!";  // Placeholder, you can add UI later
 }
+
+
