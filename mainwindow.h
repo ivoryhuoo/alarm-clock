@@ -15,7 +15,7 @@ public:
 private slots:
     void openSetAlarm();
     void openViewAlarms();
-    void handleAlarmSet(QTime time);
+    void handleAlarmSet(QTime time, QString repeat, QString label, QString sound); 
 
 private:
     ClockWidget *clockWidget;

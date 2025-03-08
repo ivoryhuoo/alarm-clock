@@ -26,9 +26,11 @@ void MainWindow::openSetAlarm() {
     setAlarmDialog->exec(); // Open as a modal dialog
 }
 
-void MainWindow::handleAlarmSet(QTime time) {
-    alarms.append(time); // Store the alarm
-    qDebug().nospace() << "Alarm set for: " << time.toString("HH:mm");
+void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QString sound) {
+    qDebug() << "Alarm set for:" << time.toString("HH:mm")
+             << "| Repeat:" << repeat
+             << "| Label:" << label
+             << "| Sound:" << sound;
 }
 
 void MainWindow::openViewAlarms() {

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SetAlarmWindow_t {
-    QByteArrayData data[5];
-    char stringdata0[40];
+    QByteArrayData data[8];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,10 +36,14 @@ QT_MOC_LITERAL(0, 0, 14), // "SetAlarmWindow"
 QT_MOC_LITERAL(1, 15, 8), // "alarmSet"
 QT_MOC_LITERAL(2, 24, 0), // ""
 QT_MOC_LITERAL(3, 25, 4), // "time"
-QT_MOC_LITERAL(4, 30, 9) // "saveAlarm"
+QT_MOC_LITERAL(4, 30, 6), // "repeat"
+QT_MOC_LITERAL(5, 37, 5), // "label"
+QT_MOC_LITERAL(6, 43, 5), // "sound"
+QT_MOC_LITERAL(7, 49, 9) // "saveAlarm"
 
     },
-    "SetAlarmWindow\0alarmSet\0\0time\0saveAlarm"
+    "SetAlarmWindow\0alarmSet\0\0time\0repeat\0"
+    "label\0sound\0saveAlarm"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,13 +61,13 @@ static const uint qt_meta_data_SetAlarmWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
+       1,    4,   24,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   27,    2, 0x08 /* Private */,
+       7,    0,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QTime,    3,
+    QMetaType::Void, QMetaType::QTime, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    4,    5,    6,
 
  // slots: parameters
     QMetaType::Void,
@@ -77,14 +81,14 @@ void SetAlarmWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         auto *_t = static_cast<SetAlarmWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->alarmSet((*reinterpret_cast< QTime(*)>(_a[1]))); break;
+        case 0: _t->alarmSet((*reinterpret_cast< QTime(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
         case 1: _t->saveAlarm(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (SetAlarmWindow::*)(QTime );
+            using _t = void (SetAlarmWindow::*)(QTime , QString , QString , QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SetAlarmWindow::alarmSet)) {
                 *result = 0;
                 return;
@@ -134,9 +138,9 @@ int SetAlarmWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SetAlarmWindow::alarmSet(QTime _t1)
+void SetAlarmWindow::alarmSet(QTime _t1, QString _t2, QString _t3, QString _t4)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
