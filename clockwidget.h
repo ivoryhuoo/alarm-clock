@@ -21,3 +21,4 @@ private:
 };
 
 #endif // CLOCKWIDGET_H
+
