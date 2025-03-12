@@ -42,11 +42,9 @@ Use Instructions:
 
 Project Structure:
 
-    MinesweeperQt/
+    Alarm/
     │── src/ - Source code files (.cpp, .h)
-    │── images/ - Minesweeper icons (mine, flag, question mark)
-    │── resources.qrc - Qt resource file for embedded images
-    │── MinesweeperQt.pro - Qt project file for qmake
+    │── Alarm.pro - Qt project file for qmake
     │── README.txt - Instructions on running the game
     │── Makefile - Generated after running qmake
 

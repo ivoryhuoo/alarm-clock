@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <QTime>
-#include <QTimer>  // Include QTimer
+#include <QTimer>  
 #include "clockwidget.h"
 #include "setalarmwindow.h"
 #include "viewAlarm.h"
@@ -23,8 +23,8 @@ private slots:
     void openSetAlarm();
     void openViewAlarms();
     void handleAlarmSet(QTime time, QString repeat, QString label, QString sound);
-    void checkAlarms();  // Function to check alarms every second
-    void snoozeAlarm(int index, int minutes);  // Snooze function
+    void checkAlarms(); 
+    void snoozeAlarm(int index, int minutes);  
 
 private:
     QPushButton *setAlarmButton;
@@ -35,7 +35,7 @@ private:
     QList<QTime> alarms;
     QList<QString> alarmLabels;
 
-    QTimer *alarmCheckTimer;  // Declare alarmCheckTimer
+    QTimer *alarmCheckTimer;  
 };
 
 #endif // MAINWINDOW_H
