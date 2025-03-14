@@ -1,5 +1,13 @@
 #include "setalarmwindow.h"
 
+/**
+ * @brief Constructs the SetAlarmWindow dialog and initializes its components.
+ * @param parent The parent widget.
+ *
+ * @author Group 27
+ * @date Friday, March 14
+ */
+
 SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Set Alarm");
 
@@ -57,6 +65,17 @@ SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
     connect(saveButton, &QPushButton::clicked, this, &SetAlarmWindow::saveAlarm);
 }
 
+/**
+ * @brief Handles the saving of the alarm settings.
+ *
+ * @details
+ * This function validates the selected time and label, then emits the `alarmSet` signal
+ * with the selected time, repeat option, label, and sound. If the time or label is invalid,
+ * an error message is displayed.
+ *
+ * @author Group 27
+ * @date March 14
+ */
 void SetAlarmWindow::saveAlarm() {
     QTime selectedTime = timeEdit->time();
     QString repeatOption = repeatComboBox->currentText();
