@@ -38,6 +38,10 @@ To run this project:
 
 
 Use Instructions:
+1. Set an alarm by clicking "Set Alarm" and entering the time and label.
+2. View all active alarms by clicking "View Alarms".
+3. Snooze an alarm by selecting "Snooze" when it rings (delays by 5 minutes)
+4. Dismiss an alarm completely by selecting "Dismiss".
 
 
 Project Structure:
