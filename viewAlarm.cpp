@@ -15,56 +15,58 @@
  * @date Friday, March 14
  */
 #include "viewAlarm.h"
+#include <QHBoxLayout>
 
 /**
  * @brief Constructs a ViewAlarm window.
- * 
- * @details Initializes the alarm viewing window with a title, a list widget
- * to display alarms, and a close button.
- * 
- * @param[in] parent Pointer to the parent widget. Defaults to nullptr.
  */
-
 ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
-    setWindowTitle("View Alarms"); /**< Sets the window title to "View Alarms". */
+    setWindowTitle("View Alarms");
     setWindowFlags(Qt::Window);
 
-    QVBoxLayout *layout = new QVBoxLayout(this); /**< Creates a vertical layout for the window. */
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
-    QLabel *titleLabel = new QLabel("Active Alarms:", this); /**< Creates a label displaying "Active Alarms:". */
-    layout->addWidget(titleLabel);
+    QLabel *titleLabel = new QLabel("Active Alarms:", this);
+    mainLayout->addWidget(titleLabel);
 
-   
-    alarmListWidget = new QListWidget(this); /**< Initializes the QListWidget to display alarms. */
-    layout->addWidget(alarmListWidget);
+    // Create layout to hold alarms as buttons
+    alarmsLayout = new QVBoxLayout();
+    mainLayout->addLayout(alarmsLayout);
 
-    QPushButton *closeButton = new QPushButton("Close", this); /**< Creates a "Close" button. */
-    layout->addWidget(closeButton);
-
-    // Connect close button to the close() function of QWidget
+    QPushButton *closeButton = new QPushButton("Close", this);
+    mainLayout->addWidget(closeButton);
     connect(closeButton, &QPushButton::clicked, this, &QWidget::close);
 
-    setLayout(layout);
+    setLayout(mainLayout);
 }
 
 /**
- * @brief Updates the displayed alarm list.
- * 
- * @details Clears the existing alarm list and repopulates it with new alarms 
- * and their associated labels.
- * 
- * @param[in] alarms A QList of QTime objects representing alarm times.
- * @param[in] labels A QList of QString objects representing alarm labels.
+ * @brief Updates the displayed alarm list, replacing each alarm with a styled button inside a frame.
  */
-
 void ViewAlarm::updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels) {
+    // Clear old alarms
+    QLayoutItem *child;
+    while ((child = alarmsLayout->takeAt(0)) != nullptr) {
+        if (child->widget()) {
+            child->widget()->deleteLater();
+        }
+        delete child;
+    }
 
-    alarmListWidget->clear(); /**< Clears the existing alarm list to avoid duplicates. */
-
+    // Add each alarm as a separate button inside a frame
     for (int i = 0; i < alarms.size(); ++i) {
+        QString alarmText = labels[i] + " - " + alarms[i].toString("HH:mm");
 
-        QString alarmText = labels[i] + " - " + alarms[i].toString("HH:mm"); /**< Formats the alarm display text. */
+        // Create a frame for styling
+        QFrame *frame = new QFrame(this);
+        frame->setFrameShape(QFrame::Box);
+        frame->setStyleSheet("QFrame { background-color: #333; border-radius: 10px; padding: 8px; }");
 
-        alarmListWidget->addItem(alarmText);
+        QHBoxLayout *frameLayout = new QHBoxLayout(frame);
+        QPushButton *alarmButton = new QPushButton(alarmText, frame);
+        alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 5px; }");
+
+        frameLayout->addWidget(alarmButton);
+        alarmsLayout->addWidget(frame);
     }
 }

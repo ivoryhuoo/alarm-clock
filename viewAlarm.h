@@ -20,42 +20,21 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QListWidget>
+#include <QFrame>
 #include <QTime>
 
 /**
- * @brief The ViewAlarm class provides a GUI for displaying active alarms.
- * 
- * @details This class extends QWidget and presents a list of active alarms in a QListWidget.
- * Users can view alarms with associated labels and close the window when needed.
+ * @brief The ViewAlarm class provides a GUI for displaying active alarms as individual buttons.
  */
-
 class ViewAlarm : public QWidget {
     Q_OBJECT
 
 public:
-    /**
-     * @brief Constructs a ViewAlarm widget.
-     * 
-     * @param[in] parent Pointer to the parent widget. Defaults to nullptr.
-     */
-
     explicit ViewAlarm(QWidget *parent = nullptr);
-
-    /**
-     * @brief Updates the alarm list displayed in the widget.
-     * 
-     * @details This function clears the existing list and populates it with 
-     * new alarms and their labels.
-     * 
-     * @param[in] alarms A list of QTime objects representing alarm times.
-     * @param[in] labels A list of QString objects representing alarm labels.
-     */
-
-    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels); // New method
+    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels);
 
 private:
-    QListWidget *alarmListWidget; /**< Widget to display the list of alarms. */
+    QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
 };
 
 #endif // VIEWALARM_H
