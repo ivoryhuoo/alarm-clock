@@ -1,18 +1,3 @@
-/**
- * @file viewAlarm.h
- * @brief Definition of the ViewAlarm class.
- * 
- * This file defines the ViewAlarm class, which provides a graphical interface 
- * for displaying a list of active alarms with their associated labels.
- * 
- * The widget consists of:
- * - A QLabel for the title.
- * - A QListWidget to display the alarms.
- * - A QPushButton to close the window.
- * 
- * @author Group 27
- * @date Friday, March 14
- */
 #ifndef VIEWALARM_H
 #define VIEWALARM_H
 
@@ -24,6 +9,8 @@
 #include <QTime>
 #include <QMap>
 #include <QScrollArea>
+#include <QFile>
+#include <QTextStream>
 
 /**
  * @brief The ViewAlarm class provides a GUI for displaying active alarms as individual buttons.
@@ -41,6 +28,7 @@ private:
 
 private slots:
     void handleAlarmClick();
+    void removeAlarm(const QString &alarmLabel);
 };
 
 #endif // VIEWALARM_H

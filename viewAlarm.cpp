@@ -1,19 +1,3 @@
-/**
- * @file viewAlarm.cpp
- * @brief Implementation of the ViewAlarm class.
- * 
- * This file implements the ViewAlarm class, which provides a GUI for viewing 
- * a list of active alarms. The class allows users to see alarms along with 
- * their labels and close the window when needed.
- * 
- * The widget consists of:
- * - A QLabel for the title.
- * - A QListWidget to display the alarms.
- * - A QPushButton to close the window.
- * 
- * @author Group 27
- * @date Friday, March 14
- */
 #include "viewAlarm.h"
 #include "alarm_details.h"
 #include <QHBoxLayout>
@@ -43,7 +27,7 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
     mainLayout->addWidget(scrollArea);
 
     // Close button
-    QPushButton *closeButton = new QPushButton("Close Button", this);
+    QPushButton *closeButton = new QPushButton("Close", this);
     mainLayout->addWidget(closeButton);
     connect(closeButton, &QPushButton::clicked, this, &QWidget::close);
 
@@ -90,6 +74,46 @@ void ViewAlarm::handleAlarmClick() {
 
         // Open the new details window
         AlarmDetails *detailsWindow = new AlarmDetails(alarmLabel, this);
+        connect(detailsWindow, &AlarmDetails::alarmDeleted, this, &ViewAlarm::removeAlarm);
         detailsWindow->exec();  // Open as a modal dialog
+    }
+}
+
+/**
+ * @brief Removes an alarm from the UI and the file.
+ */
+void ViewAlarm::removeAlarm(const QString &alarmLabel) {
+    qDebug() << "Removing alarm:" << alarmLabel;
+
+    // Remove from UI
+    for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
+        if (it.value() == alarmLabel) {
+            delete it.key(); // Delete the button
+            alarmButtons.erase(it);
+            break;
+        }
+    }
+
+    // Remove from file
+    QFile file("alarms.txt");  // Adjust the file path if necessary
+    if (file.open(QIODevice::ReadOnly)) {
+        QStringList lines;
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            if (!line.contains(alarmLabel)) { // Keep non-matching lines
+                lines.append(line);
+            }
+        }
+        file.close();
+
+        // Write updated data back to file
+        if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+            QTextStream out(&file);
+            for (const QString &line : lines) {
+                out << line << "\n";
+            }
+            file.close();
+        }
     }
 }

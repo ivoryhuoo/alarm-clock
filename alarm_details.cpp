@@ -9,15 +9,31 @@ AlarmDetails::AlarmDetails(QString alarmLabel, QWidget *parent)
     setWindowTitle("Alarm Details");
     setFixedSize(250, 150);
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     alarmLabelDisplay = new QLabel("Alarm: " + alarmLabel, this);
-    layout->addWidget(alarmLabelDisplay);
+    mainLayout->addWidget(alarmLabelDisplay);
 
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    
+    deleteButton = new QPushButton("Delete", this);
     closeButton = new QPushButton("Close", this);
-    layout->addWidget(closeButton);
+
+    buttonLayout->addWidget(deleteButton);
+    buttonLayout->addWidget(closeButton);
+
+    mainLayout->addLayout(buttonLayout);
 
     connect(closeButton, &QPushButton::clicked, this, &QDialog::close);
+    connect(deleteButton, &QPushButton::clicked, this, &AlarmDetails::onDeleteClicked);
 
-    setLayout(layout); // Ensure layout is applied
+    setLayout(mainLayout);
+}
+
+/**
+ * @brief Handles the deletion of the alarm.
+ */
+void AlarmDetails::onDeleteClicked() {
+    emit alarmDeleted(alarmLabelDisplay->text().remove("Alarm: ")); // Emit signal with alarm label
+    close(); // Close the dialog
 }
