@@ -816,6 +816,12 @@ moc_clockwidget.cpp: clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimer.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTime \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimeZone \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimezone.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
 	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include /Users/trinityung/group27/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I/Users/trinityung/group27 -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib clockwidget.h -o moc_clockwidget.cpp
@@ -838,17 +844,19 @@ moc_mainwindow.cpp: mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimeZone \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimezone.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
@@ -960,17 +968,19 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimeZone \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimezone.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
@@ -994,7 +1004,13 @@ clockwidget.o: clockwidget.cpp clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimer \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimer.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTime \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimeZone \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimezone.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clockwidget.o clockwidget.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -1015,17 +1031,19 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimeZone \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimezone.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
-		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
