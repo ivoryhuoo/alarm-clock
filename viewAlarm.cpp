@@ -37,8 +37,12 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
 /**
  * @brief Updates the displayed alarm list, replacing each alarm with a button.
  */
-void ViewAlarm::updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels) {
-    qDebug() << "Updating alarm list. Total alarms:" << alarms.size();
+void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels) {
+    qDebug() << "Updating alarm list. Total alarms:" << newAlarms.size();
+
+    // Update stored alarm lists
+    alarms = newAlarms;
+    alarmLabels = newLabels;
 
     // Clear old buttons
     QLayoutItem *child;
@@ -52,16 +56,17 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &alarms, const QList<QString>
 
     // Add each alarm as a separate button
     for (int i = 0; i < alarms.size(); ++i) {
-        QString alarmText = labels[i] + " - " + alarms[i].toString("HH:mm");
+        QString alarmText = alarmLabels[i] + " - " + alarms[i].toString("HH:mm");
 
         QPushButton *alarmButton = new QPushButton(alarmText, this);
         alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 10px; }");
         connect(alarmButton, &QPushButton::clicked, this, &ViewAlarm::handleAlarmClick);
 
-        alarmButtons.insert(alarmButton, labels[i]); // Store button-label mapping
+        alarmButtons.insert(alarmButton, alarmLabels[i]); // Store button-label mapping
         alarmsLayout->addWidget(alarmButton);
     }
 }
+
 
 /**
  * @brief Handles alarm button clicks by opening a new window.
@@ -72,18 +77,40 @@ void ViewAlarm::handleAlarmClick() {
         QString alarmLabel = alarmButtons.value(senderButton);
         qDebug() << "Alarm clicked:" << alarmLabel;
 
-        // Open the new details window
-        AlarmDetails *detailsWindow = new AlarmDetails(alarmLabel, this);
+        int index = alarmLabels.indexOf(alarmLabel);
+        if (index == -1) return; // If alarm is not found, return
+
+        QTime alarmTime = alarms[index];
+
+        // Open AlarmDetails with real alarm values
+        AlarmDetails *detailsWindow = new AlarmDetails(alarmTime, "Never", alarmLabel, "Default", this);
+
+        // Connect modifications
+        connect(detailsWindow, &AlarmDetails::alarmModified, this, [=](QTime newTime, QString newRepeat, QString newLabel, QString newSound) {
+            alarms[index] = newTime;
+            alarmLabels[index] = newLabel;
+            updateAlarmList(alarms, alarmLabels);
+        });
+
+        // Connect deletions
         connect(detailsWindow, &AlarmDetails::alarmDeleted, this, &ViewAlarm::removeAlarm);
-        detailsWindow->exec();  // Open as a modal dialog
+
+        detailsWindow->exec();
     }
 }
+
 
 /**
  * @brief Removes an alarm from the UI and the file.
  */
 void ViewAlarm::removeAlarm(const QString &alarmLabel) {
     qDebug() << "Removing alarm:" << alarmLabel;
+
+    int index = alarmLabels.indexOf(alarmLabel);
+    if (index == -1) return;
+
+    alarms.removeAt(index);
+    alarmLabels.removeAt(index);
 
     // Remove from UI
     for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
@@ -94,26 +121,5 @@ void ViewAlarm::removeAlarm(const QString &alarmLabel) {
         }
     }
 
-    // Remove from file
-    QFile file("alarms.txt");  // Adjust the file path if necessary
-    if (file.open(QIODevice::ReadOnly)) {
-        QStringList lines;
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            if (!line.contains(alarmLabel)) { // Keep non-matching lines
-                lines.append(line);
-            }
-        }
-        file.close();
-
-        // Write updated data back to file
-        if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-            QTextStream out(&file);
-            for (const QString &line : lines) {
-                out << line << "\n";
-            }
-            file.close();
-        }
-    }
+    updateAlarmList(alarms, alarmLabels);
 }

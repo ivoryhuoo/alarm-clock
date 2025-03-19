@@ -25,6 +25,8 @@ public:
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
     QMap<QPushButton*, QString> alarmButtons; /**< Map buttons to labels */
+    QList<QTime> alarms; /**< Stores alarm times */
+    QList<QString> alarmLabels; /**< Stores alarm labels */
 
 private slots:
     void handleAlarmClick();
