@@ -22,6 +22,8 @@
 #include <QPushButton>
 #include <QFrame>
 #include <QTime>
+#include <QMap>
+#include <QScrollArea>
 
 /**
  * @brief The ViewAlarm class provides a GUI for displaying active alarms as individual buttons.
@@ -35,6 +37,10 @@ public:
 
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
+    QMap<QPushButton*, QString> alarmButtons; /**< Map buttons to labels */
+
+private slots:
+    void handleAlarmClick();
 };
 
 #endif // VIEWALARM_H

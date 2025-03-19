@@ -15,7 +15,9 @@
  * @date Friday, March 14
  */
 #include "viewAlarm.h"
+#include "alarm_details.h"
 #include <QHBoxLayout>
+#include <QDebug>
 
 /**
  * @brief Constructs a ViewAlarm window.
@@ -29,11 +31,19 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
     QLabel *titleLabel = new QLabel("Active Alarms:", this);
     mainLayout->addWidget(titleLabel);
 
-    // Create layout to hold alarms as buttons
-    alarmsLayout = new QVBoxLayout();
-    mainLayout->addLayout(alarmsLayout);
+    // Scrollable area to hold buttons
+    QScrollArea *scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
 
-    QPushButton *closeButton = new QPushButton("Close", this);
+    QWidget *scrollWidget = new QWidget();
+    alarmsLayout = new QVBoxLayout(scrollWidget);
+    scrollWidget->setLayout(alarmsLayout);
+
+    scrollArea->setWidget(scrollWidget);
+    mainLayout->addWidget(scrollArea);
+
+    // Close button
+    QPushButton *closeButton = new QPushButton("Close Button", this);
     mainLayout->addWidget(closeButton);
     connect(closeButton, &QPushButton::clicked, this, &QWidget::close);
 
@@ -41,10 +51,12 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
 }
 
 /**
- * @brief Updates the displayed alarm list, replacing each alarm with a styled button inside a frame.
+ * @brief Updates the displayed alarm list, replacing each alarm with a button.
  */
 void ViewAlarm::updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels) {
-    // Clear old alarms
+    qDebug() << "Updating alarm list. Total alarms:" << alarms.size();
+
+    // Clear old buttons
     QLayoutItem *child;
     while ((child = alarmsLayout->takeAt(0)) != nullptr) {
         if (child->widget()) {
@@ -52,21 +64,32 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &alarms, const QList<QString>
         }
         delete child;
     }
+    alarmButtons.clear();
 
-    // Add each alarm as a separate button inside a frame
+    // Add each alarm as a separate button
     for (int i = 0; i < alarms.size(); ++i) {
         QString alarmText = labels[i] + " - " + alarms[i].toString("HH:mm");
 
-        // Create a frame for styling
-        QFrame *frame = new QFrame(this);
-        frame->setFrameShape(QFrame::Box);
-        frame->setStyleSheet("QFrame { background-color: #333; border-radius: 10px; padding: 8px; }");
+        QPushButton *alarmButton = new QPushButton(alarmText, this);
+        alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 10px; }");
+        connect(alarmButton, &QPushButton::clicked, this, &ViewAlarm::handleAlarmClick);
 
-        QHBoxLayout *frameLayout = new QHBoxLayout(frame);
-        QPushButton *alarmButton = new QPushButton(alarmText, frame);
-        alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 5px; }");
+        alarmButtons.insert(alarmButton, labels[i]); // Store button-label mapping
+        alarmsLayout->addWidget(alarmButton);
+    }
+}
 
-        frameLayout->addWidget(alarmButton);
-        alarmsLayout->addWidget(frame);
+/**
+ * @brief Handles alarm button clicks by opening a new window.
+ */
+void ViewAlarm::handleAlarmClick() {
+    QPushButton *senderButton = qobject_cast<QPushButton*>(sender());
+    if (senderButton && alarmButtons.contains(senderButton)) {
+        QString alarmLabel = alarmButtons.value(senderButton);
+        qDebug() << "Alarm clicked:" << alarmLabel;
+
+        // Open the new details window
+        AlarmDetails *detailsWindow = new AlarmDetails(alarmLabel, this);
+        detailsWindow->exec();  // Open as a modal dialog
     }
 }
