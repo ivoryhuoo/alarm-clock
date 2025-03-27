@@ -48,12 +48,10 @@ SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
 
     // Sound Selection Dropdown 
     soundComboBox = new QComboBox(this);
-    // Placeholder names, modify these 
-    soundComboBox->addItem("Default");
+    // options for sound
+    soundComboBox->addItem("Classic");
     soundComboBox->addItem("Beep");
-    soundComboBox->addItem("Chime");
-    soundComboBox->addItem("Birdsong");
-    soundComboBox->addItem("Classic Alarm");
+    soundComboBox->addItem("Rooster");
 
     // Save Button
     saveButton = new QPushButton("Save Alarm", this);

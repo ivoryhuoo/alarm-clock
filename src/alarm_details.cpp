@@ -56,11 +56,10 @@ AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString so
     // Sound Dropdown
     layout->addWidget(new QLabel("Sound:"));
     soundComboBox = new QComboBox(this);
-    soundComboBox->addItem("Default");
+    soundComboBox->addItem("Classic");
     soundComboBox->addItem("Beep");
-    soundComboBox->addItem("Chime");
-    soundComboBox->addItem("Birdsong");
-    soundComboBox->addItem("Classic Alarm");
+    soundComboBox->addItem("Rooster");
+
     soundComboBox->setCurrentText(sound);
     layout->addWidget(soundComboBox);
 
