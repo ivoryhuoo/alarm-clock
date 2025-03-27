@@ -1,3 +1,11 @@
+/**
+ * @class ViewAlarm.cpp
+ * @brief The ViewAlarm class displays a list of active alarms in a scrollable window.
+ * 
+ * This class provides functionality to view, update, and delete alarms through an interactive UI.
+ */
+
+
 #include "viewAlarm.h"
 #include "alarm_details.h"
 #include <QHBoxLayout>
@@ -5,7 +13,12 @@
 
 /**
  * @brief Constructs a ViewAlarm window.
+ * 
+ * Initializes the window with a scrollable list of alarms and a close button.
+ * 
+ * @param parent The parent widget (default is nullptr).
  */
+
 ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
     setWindowTitle("View Alarms");
     setWindowFlags(Qt::Window);
@@ -36,6 +49,12 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
 
 /**
  * @brief Updates the displayed alarm list, replacing each alarm with a button.
+ * 
+ * This method clears the existing alarm buttons and repopulates the list based on the
+ * provided newAlarms and newLabels.
+ * 
+ * @param newAlarms A list of QTime objects representing the alarm times.
+ * @param newLabels A list of QString objects representing the alarm labels.
  */
 void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels, const QList<QString> &newRepeats) {
     qDebug() << "Updating alarm list. Total alarms:" << newAlarms.size();
@@ -71,8 +90,12 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QStri
 
 
 /**
- * @brief Handles alarm button clicks by opening a new window.
+ * @brief Handles alarm button clicks by opening a new window with alarm details.
+ * 
+ * This method retrieves the clicked alarm's details and opens an AlarmDetails
+ * dialog, allowing the user to modify or delete the alarm.
  */
+
 void ViewAlarm::handleAlarmClick() {
     QPushButton *senderButton = qobject_cast<QPushButton*>(sender());
     if (senderButton && alarmButtons.contains(senderButton)) {
@@ -105,8 +128,14 @@ void ViewAlarm::handleAlarmClick() {
 
 
 /**
- * @brief Removes an alarm from the UI and the file.
+ * @brief Removes an alarm from the UI and the stored list.
+ * 
+ * This method deletes the alarm from both the UI and the internal alarm list
+ * when the user chooses to remove an alarm.
+ * 
+ * @param alarmLabel The label of the alarm to be removed.
  */
+
 void ViewAlarm::removeAlarm(const QString &alarmLabel) {
     qDebug() << "Removing alarm:" << alarmLabel;
 

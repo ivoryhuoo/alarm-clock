@@ -1,6 +1,7 @@
 #include "setalarmwindow.h"
 
 /**
+ * @file setalarmwindow.cpp
  * @brief Constructs the SetAlarmWindow dialog and initializes its components.
  * @param parent The parent widget.
  *
