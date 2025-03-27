@@ -409,6 +409,7 @@ DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/qt_config.prf \
 		/opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf \
 		/opt/homebrew/share/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/homebrew/share/qt/mkspecs/features/exclusive_builds.prf \
 		/opt/homebrew/share/qt/mkspecs/features/mac/sdk.prf \
 		/opt/homebrew/share/qt/mkspecs/features/toolchain.prf \
@@ -455,7 +456,7 @@ TARGET        = Alarm
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 15.2
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/tsidkenutomori/group27/.qmake.stash
 EXPORT_VALID_ARCHS = arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -804,6 +805,7 @@ Makefile: Alarm.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt/ho
 		/opt/homebrew/share/qt/mkspecs/features/qt_config.prf \
 		/opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf \
 		/opt/homebrew/share/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/homebrew/share/qt/mkspecs/features/exclusive_builds.prf \
 		/opt/homebrew/share/qt/mkspecs/features/mac/sdk.prf \
 		/opt/homebrew/share/qt/mkspecs/features/toolchain.prf \
@@ -1174,6 +1176,7 @@ Makefile: Alarm.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt/ho
 /opt/homebrew/share/qt/mkspecs/features/qt_config.prf:
 /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf:
 /opt/homebrew/share/qt/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/homebrew/share/qt/mkspecs/features/exclusive_builds.prf:
 /opt/homebrew/share/qt/mkspecs/features/mac/sdk.prf:
 /opt/homebrew/share/qt/mkspecs/features/toolchain.prf:
@@ -1236,6 +1239,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1334,8 +1338,6 @@ moc_mainwindow.cpp: include/mainwindow.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTextStream \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
 	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/mainwindow.h -o moc_mainwindow.cpp
@@ -1380,8 +1382,6 @@ moc_viewAlarm.cpp: include/viewAlarm.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTextStream \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
 	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/viewAlarm.h -o moc_viewAlarm.cpp
@@ -1466,9 +1466,7 @@ main.o: main.cpp /opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/lib/QtCore.framework/Headers/QFile \
 		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTextStream \
-		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/qsoundeffect.h
+		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 clockwidget.o: src/clockwidget.cpp include/clockwidget.h \
@@ -1532,8 +1530,6 @@ mainwindow.o: src/mainwindow.cpp include/mainwindow.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTextStream \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
 		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/mainwindow.cpp
@@ -1576,8 +1572,6 @@ viewAlarm.o: src/viewAlarm.cpp include/viewAlarm.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTextStream \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/opt/homebrew/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		include/alarm_details.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qdialog.h \

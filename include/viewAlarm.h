@@ -22,20 +22,6 @@
 #include <QScrollArea>
 #include <QFile>
 #include <QTextStream>
-#include <QSoundEffect>
-
-struct Alarm {
-    QTime time;
-    QString label;
-    QString sound;  // "ring1", "ring2", or "ring3"
-    QString repeat; // "Never", "Daily", etc.
-    bool isActive = true;
-
-    QString toString() const {
-        return time.toString("hh:mm ap") + " - " + label + 
-               " (" + sound + ", " + repeat + ")";
-    }
-};
 
 /**
  * @class ViewAlarm
@@ -66,19 +52,15 @@ public:
      * @param labels List of alarm labels.
      */
 
-    void updateAlarmList(const QList<Alarm> &alarms);
+    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels, const QList<QString> &repeats);
 
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
-    QMap<QPushButton*, Alarm> alarmButtons; /**< Map buttons to labels */
-    QList<Alarm> alarms; /**< Stores alarms */
+    QMap<QPushButton*, QString> alarmButtons; /**< Map buttons to labels */
+    QList<QTime> alarms; /**< Stores alarm times */
     QList<QString> alarmLabels; /**< Stores alarm labels */
     QList<QString> alarmRepeats; /**< Stores alarm repeat settings */
 
-signals:
-    void alarmModified(const Alarm &alarm);
-    void alarmDeleted(const QString &label);
-    
 
 private slots:
     /**

@@ -27,8 +27,6 @@
 #include "clockwidget.h"
 #include "setalarmwindow.h"
 #include "viewAlarm.h"
-#include <QSoundEffect>   // For audio device handling
-
 
 /**
  * @class MainWindow
@@ -92,29 +90,16 @@ private slots:
      */
     void snoozeAlarm(int index, int minutes);  
 
-    /**
-     * @brief Handles modifications to existing alarms
-     * @param modifiedAlarm The updated alarm structure
-     */
-    void handleAlarmModified(const Alarm &modifiedAlarm);
-    
-    /**
-     * @brief Handles deletion of alarms
-     * @param alarmLabel The label of the alarm to delete
-     */
-    void handleAlarmDeleted(const QString &alarmLabel);
-
-signals:
-    void alarmModified(const Alarm &modifiedAlarm);
-    void alarmDeleted(const QString &alarmLabel);
-
 private:
     QPushButton *setAlarmButton;  /**< Button to open the Set Alarm window */
     QPushButton *viewAlarmsButton; /**< Button to open the View Alarms window */
     ViewAlarm *viewAlarmWindow; /**< Pointer to the View Alarm window */
     ClockWidget *clockWidget; /**< Widget displaying the current time */
 
-    QList<Alarm> alarms; /**< List of active alarms*/
+    QList<QTime> alarms; /**< List of active alarm times */
+    QList<QString> alarmLabels; /**< List of labels associated with alarms */
+    QList<QString> alarmRepeats; // Stores repeat settings
+
 
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
 };

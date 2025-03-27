@@ -46,10 +46,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(setAlarmButton, &QPushButton::clicked, this, &MainWindow::openSetAlarm);
     connect(viewAlarmsButton, &QPushButton::clicked, this, &MainWindow::openViewAlarms);
 
-    // In MainWindow constructor, after creating viewAlarmWindow:
-    connect(viewAlarmWindow, &ViewAlarm::alarmModified, this, &MainWindow::handleAlarmModified);
-    connect(viewAlarmWindow, &ViewAlarm::alarmDeleted, this, &MainWindow::handleAlarmDeleted);
-
     alarmCheckTimer = new QTimer(this);
     connect(alarmCheckTimer, &QTimer::timeout, this, &MainWindow::checkAlarms);
     alarmCheckTimer->start(1000);  // Check every second
@@ -85,11 +81,12 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
              << "| Label:" << label
              << "| Sound:" << sound;
 
-
-    alarms.append({time, label, sound, repeat});
+    alarms.append(time);
+    alarmLabels.append(label);
+    alarmRepeats.append(repeat); 
 
     if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms); 
+        viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats); 
     }
 }
 
@@ -106,7 +103,7 @@ void MainWindow::openViewAlarms() {
         viewAlarmWindow = new ViewAlarm(this);
     }
 
-    viewAlarmWindow->updateAlarmList(alarms); // Update with latest alarms
+    viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats); // Update with latest alarms
     viewAlarmWindow->show();
 }
 
@@ -122,12 +119,10 @@ void MainWindow::checkAlarms() {
     int currentMinute = currentTime.minute();
 
     for (int i = 0; i < alarms.size(); ++i) {
-        if (alarms[i].time.hour() == currentHour && alarms[i].time.minute() == currentMinute) {
-            qDebug() << "Alarm triggered:" << alarms[i].toString();
-
+        if (alarms[i].hour() == currentHour && alarms[i].minute() == currentMinute) {
             QMessageBox msgBox;
             msgBox.setWindowTitle("Alarm Triggered");
-            msgBox.setText(alarms[i].label + " has gone off!");
+            msgBox.setText(alarmLabels[i] + " has gone off!");
             QPushButton *snoozeButton = msgBox.addButton("Snooze", QMessageBox::ActionRole);
             QPushButton *dismissButton = msgBox.addButton("Dismiss", QMessageBox::RejectRole);
 
@@ -136,9 +131,11 @@ void MainWindow::checkAlarms() {
             if (msgBox.clickedButton() == snoozeButton) {
                 snoozeAlarm(i, 5); // Snooze for 5 minutes
                 alarms.removeAt(i); // Dismiss the alarm
+                alarmLabels.removeAt(i);
                 return;
             } else {
                 alarms.removeAt(i); // Dismiss the alarm
+                alarmLabels.removeAt(i);
             }
 
             return; // Stop checking after first matched alarm
@@ -155,47 +152,13 @@ void MainWindow::checkAlarms() {
  * @param minutes The number of minutes to snooze for.
  */
 void MainWindow::snoozeAlarm(int index, int minutes) {
-    // Create a copy of the alarm with updated time
-    Alarm snoozedAlarm = alarms[index];
-    snoozedAlarm.time = QTime::currentTime().addSecs(minutes * 60);
-    snoozedAlarm.label += " (Snoozed)";
-    
-    // Add to alarms list
-    alarms.append(snoozedAlarm);
-    
-    qDebug() << "Alarm snoozed until" << snoozedAlarm.time.toString("HH:mm");
+    QTime snoozedTime = alarms[index].addSecs(minutes * 60); // Add minutes
+    alarms.append(snoozedTime);
+    alarmLabels.append(alarmLabels[index] + " (Snoozed)"); // Indicate it's snoozed
+
+    qDebug() << "Alarm snoozed until" << snoozedTime.toString("HH:mm");
 
     if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms);
-    }
-}
-
-void MainWindow::handleAlarmModified(const Alarm &modifiedAlarm) {
-    // Find and update the existing alarm
-    for (Alarm &alarm : alarms) {
-        if (alarm.label == modifiedAlarm.label) {  // Using label as identifier
-            alarm = modifiedAlarm;
-            qDebug() << "Modified alarm:" << alarm.toString();
-            break;
-        }
-    }
-    
-    // Update the view
-    if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms);
-    }
-}
-
-void MainWindow::handleAlarmDeleted(const QString &alarmLabel) {
-    // Remove the alarm by label
-    alarms.erase(std::remove_if(alarms.begin(), alarms.end(),
-        [&alarmLabel](const Alarm &a) { return a.label == alarmLabel; }),
-        alarms.end());
-    
-    qDebug() << "Deleted alarm:" << alarmLabel;
-    
-    // Update the view
-    if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms);
+        viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats);
     }
 }
