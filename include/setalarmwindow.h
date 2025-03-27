@@ -47,12 +47,12 @@ private slots:
     void saveAlarm();
 
 private:
-    QTimeEdit *timeEdit;         /**< Time selection widget. */
-    QComboBox *repeatComboBox;  /**< Repeat option selection widget. */
-    QLineEdit *labelEdit;        /**< Alarm label input widget. */
-    QComboBox *soundComboBox;   /**< Sound selection widget. */
-    QPushButton *saveButton;     /**< Button to save the alarm. */
-    QLabel *errorLabel;         /**< Label to display error messages. */
-};
+    QTimeEdit *timeEdit;         ///< Time selection widget. 
+    QComboBox *repeatComboBox;  ///< Repeat option selection widget. 
+    QLineEdit *labelEdit;        ///< Alarm label input widget. 
+    QComboBox *soundComboBox;   ///< Sound selection widget. 
+    QPushButton *saveButton;     ///< Button to save the alarm. 
+    QLabel *errorLabel;         ///< Label to display error messages. 
+}
 
 #endif // SETALARMWINDOW_H

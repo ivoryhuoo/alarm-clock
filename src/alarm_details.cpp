@@ -1,11 +1,26 @@
+/**
+ * @file alarm_details.cpp
+ * @brief Implementation file for the AlarmDetails class.
+ *
+ * This file contains the implementation of the AlarmDetails class, which
+ * provides a dialog for modifying or deleting an alarm.
+ *
+ * @author Group 27
+ * @date Sunday, March 30
+ */
+
 #include "alarm_details.h"
 
 /**
  * @brief Constructs the AlarmDetails window.
+ *
+ * Initializes the alarm modification interface, allowing users to update or delete an alarm.
+ *
  * @param time The alarm's time.
  * @param repeat The alarm's repeat setting.
  * @param label The alarm's label.
  * @param sound The alarm's sound setting.
+ * @param parent The parent widget (default is nullptr).
  */
 AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString sound, QWidget *parent)
     : QDialog(parent) {
@@ -70,7 +85,10 @@ AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString so
 
 /**
  * @brief Handles the modification of the alarm.
+ *
+ * Emits a signal with the updated alarm details and closes the dialog.
  */
+
 void AlarmDetails::modifyAlarm() {
     emit alarmModified(timeEdit->time(), repeatComboBox->currentText(), labelEdit->text(), soundComboBox->currentText());
     close(); // Close the dialog
@@ -78,7 +96,10 @@ void AlarmDetails::modifyAlarm() {
 
 /**
  * @brief Handles the deletion of the alarm.
+ *
+ * Emits a signal with the alarm label and closes the dialog.
  */
+
 void AlarmDetails::onDeleteClicked() {
     emit alarmDeleted(labelEdit->text()); // Emit signal with alarm label
     close(); // Close the dialog
