@@ -20,13 +20,15 @@ class ViewAlarm : public QWidget {
 
 public:
     explicit ViewAlarm(QWidget *parent = nullptr);
-    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels);
+    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels, const QList<QString> &repeats);
 
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
     QMap<QPushButton*, QString> alarmButtons; /**< Map buttons to labels */
     QList<QTime> alarms; /**< Stores alarm times */
     QList<QString> alarmLabels; /**< Stores alarm labels */
+    QList<QString> alarmRepeats; /**< Stores alarm repeat settings */
+
 
 private slots:
     void handleAlarmClick();
