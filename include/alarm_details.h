@@ -1,10 +1,11 @@
 /**
+ * @file alarm_details.h
  * @brief  Header file for the AlarmDetails class.
  * 
  * This file contains the definition of the AlarmDetails class, which provides
  * a dialog for modifying and deleting alarm details.
  * 
- * @author
+ * @author Group 27
  * @date Sunday, March 30
  */
 
@@ -20,13 +21,6 @@
 #include <QComboBox>
 
 /**
- * @class AlarmDetails
- * @brief Dialog for modifying and deleting alarm details.
- * 
- * The AlarmDetails class allows users to edit alarm settings such as time,
- * repeat frequency, label, and sound. It emits signals when alarms are
- * modified or deleted.
- *//**
  * @class AlarmDetails
  * @brief Dialog for modifying and deleting alarm details.
  * 

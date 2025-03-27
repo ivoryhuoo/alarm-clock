@@ -1,3 +1,15 @@
+/**
+ * @file setalarmwindow.h
+ * @brief Header file for the SetAlarmWindow class.
+ * 
+ * This file contains the declaration of the SetAlarmWindow class, which is a dialog that allows
+ * the user to set an alarm. It includes options for selecting the time, repeat option, label, and sound.
+ * The alarm settings can be saved and emitted to the main window.
+ * 
+ * @author Group 27
+ * @date Friday, March 14
+ */
+
 #ifndef SETALARMWINDOW_H
 #define SETALARMWINDOW_H
 
@@ -10,16 +22,15 @@
 #include <QComboBox>
 
 /**
- * @headerfile setalarmwindow.h
+ * @class SetAlarmWindow
  * @brief The SetAlarmWindow class provides a dialog for setting an alarm.
- *
- * @details
- * This class allows the user to set an alarm by selecting a time, repeat option, label, and sound.
- * The alarm settings can be saved and emitted to the main window.
  * 
- * @author Group 27
- * @date Friday, March 14
+ * The SetAlarmWindow class allows users to set an alarm by selecting a time, a repeat option, a label, and a sound.
+ * The alarm settings are saved when the user clicks the save button. A signal is emitted to the main window with the 
+ * alarm details, which include the time, repeat option, label, and sound.
+ * 
  */
+
 class SetAlarmWindow : public QDialog {
     Q_OBJECT
 

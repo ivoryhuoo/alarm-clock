@@ -1,8 +1,11 @@
 /**
- * @class ViewAlarm.cpp
+ * @file ViewAlarm.cpp
  * @brief The ViewAlarm class displays a list of active alarms in a scrollable window.
  * 
  * This class provides functionality to view, update, and delete alarms through an interactive UI.
+ * 
+ * @author Group 27
+ * @date Sunday, March 30
  */
 
 
