@@ -52,7 +52,7 @@ public:
      * @param labels List of alarm labels.
      */
 
-    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels);
+    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels, const QList<QString> &repeats);
 
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
