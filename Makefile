@@ -17,7 +17,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=10.13 -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -O2 -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=10.13 -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I. -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -F/opt/homebrew/Cellar/qt@5/5.15.16/lib
+INCPATH       = -I. -Iinclude -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -F/opt/homebrew/Cellar/qt@5/5.15.16/lib
 QMAKE         = /opt/homebrew/opt/qt@5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -53,11 +53,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		clockwidget.cpp \
-		mainwindow.cpp \
-		setalarmwindow.cpp \
-		viewAlarm.cpp \
-		alarm_details.cpp moc_clockwidget.cpp \
+		src/clockwidget.cpp \
+		src/mainwindow.cpp \
+		src/setalarmwindow.cpp \
+		src/viewAlarm.cpp \
+		src/alarm_details.cpp moc_clockwidget.cpp \
 		moc_mainwindow.cpp \
 		moc_setalarmwindow.cpp \
 		moc_viewAlarm.cpp \
@@ -285,16 +285,16 @@ DIST          = /opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/spec_pre.prf 
 		/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/exceptions.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/yacc.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/lex.prf \
-		Alarm.pro clockwidget.h \
-		mainwindow.h \
-		setalarmwindow.h \
-		viewAlarm.h \
-		alarm_details.h main.cpp \
-		clockwidget.cpp \
-		mainwindow.cpp \
-		setalarmwindow.cpp \
-		viewAlarm.cpp \
-		alarm_details.cpp
+		Alarm.pro include/clockwidget.h \
+		include/mainwindow.h \
+		include/setalarmwindow.h \
+		include/viewAlarm.h \
+		include/alarm_details.h main.cpp \
+		src/clockwidget.cpp \
+		src/mainwindow.cpp \
+		src/setalarmwindow.cpp \
+		src/viewAlarm.cpp \
+		src/alarm_details.cpp
 QMAKE_TARGET  = Alarm
 DESTDIR       = 
 TARGET        = Alarm
@@ -766,8 +766,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents clockwidget.h mainwindow.h setalarmwindow.h viewAlarm.h alarm_details.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp clockwidget.cpp mainwindow.cpp setalarmwindow.cpp viewAlarm.cpp alarm_details.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/clockwidget.h include/mainwindow.h include/setalarmwindow.h include/viewAlarm.h include/alarm_details.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp src/clockwidget.cpp src/mainwindow.cpp src/setalarmwindow.cpp src/viewAlarm.cpp src/alarm_details.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -805,7 +805,7 @@ moc_predefs.h: /opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: moc_clockwidget.cpp moc_mainwindow.cpp moc_setalarmwindow.cpp moc_viewAlarm.cpp moc_alarm_details.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_clockwidget.cpp moc_mainwindow.cpp moc_setalarmwindow.cpp moc_viewAlarm.cpp moc_alarm_details.cpp
-moc_clockwidget.cpp: clockwidget.h \
+moc_clockwidget.cpp: include/clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
@@ -824,9 +824,9 @@ moc_clockwidget.cpp: clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
-	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib clockwidget.h -o moc_clockwidget.cpp
+	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/include' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib include/clockwidget.h -o moc_clockwidget.cpp
 
-moc_mainwindow.cpp: mainwindow.h \
+moc_mainwindow.cpp: include/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QPushButton \
@@ -839,7 +839,7 @@ moc_mainwindow.cpp: mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimer \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimer.h \
-		clockwidget.h \
+		include/clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
@@ -850,14 +850,14 @@ moc_mainwindow.cpp: mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
-		setalarmwindow.h \
+		include/setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		viewAlarm.h \
+		include/viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QMap \
@@ -870,9 +870,9 @@ moc_mainwindow.cpp: mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtextstream.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
-	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib mainwindow.h -o moc_mainwindow.cpp
+	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/include' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib include/mainwindow.h -o moc_mainwindow.cpp
 
-moc_setalarmwindow.cpp: setalarmwindow.h \
+moc_setalarmwindow.cpp: include/setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
@@ -889,9 +889,9 @@ moc_setalarmwindow.cpp: setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
-	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib setalarmwindow.h -o moc_setalarmwindow.cpp
+	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/include' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib include/setalarmwindow.h -o moc_setalarmwindow.cpp
 
-moc_viewAlarm.cpp: viewAlarm.h \
+moc_viewAlarm.cpp: include/viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QVBoxLayout \
@@ -914,9 +914,9 @@ moc_viewAlarm.cpp: viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtextstream.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
-	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib viewAlarm.h -o moc_viewAlarm.cpp
+	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/include' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib include/viewAlarm.h -o moc_viewAlarm.cpp
 
-moc_alarm_details.cpp: alarm_details.h \
+moc_alarm_details.cpp: include/alarm_details.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
@@ -933,7 +933,7 @@ moc_alarm_details.cpp: alarm_details.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc
-	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib alarm_details.h -o moc_alarm_details.cpp
+	/opt/homebrew/Cellar/qt@5/5.15.16/bin/moc $(DEFINES) --include '/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/moc_predefs.h' -I/opt/homebrew/Cellar/qt@5/5.15.16/mkspecs/macx-clang -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27' -I'/Users/ivoryhuo/CS3307/MinesweeperQt copy/group27/include' -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.16/lib include/alarm_details.h -o moc_alarm_details.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -955,7 +955,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qapplication.h \
-		mainwindow.h \
+		include/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QPushButton \
@@ -968,7 +968,7 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimer \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimer.h \
-		clockwidget.h \
+		include/clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
@@ -979,14 +979,14 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
-		setalarmwindow.h \
+		include/setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		viewAlarm.h \
+		include/viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QMap \
@@ -999,7 +999,7 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-clockwidget.o: clockwidget.cpp clockwidget.h \
+clockwidget.o: src/clockwidget.cpp include/clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
@@ -1016,9 +1016,9 @@ clockwidget.o: clockwidget.cpp clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clockwidget.o clockwidget.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clockwidget.o src/clockwidget.cpp
 
-mainwindow.o: mainwindow.cpp mainwindow.h \
+mainwindow.o: src/mainwindow.cpp include/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QPushButton \
@@ -1031,7 +1031,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdatetime.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTimer \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtimer.h \
-		clockwidget.h \
+		include/clockwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLCDNumber \
@@ -1042,14 +1042,14 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLabel \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlabel.h \
-		setalarmwindow.h \
+		include/setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
-		viewAlarm.h \
+		include/viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QFrame \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qframe.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QMap \
@@ -1062,9 +1062,9 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtextstream.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QDebug \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/mainwindow.cpp
 
-setalarmwindow.o: setalarmwindow.cpp setalarmwindow.h \
+setalarmwindow.o: src/setalarmwindow.cpp include/setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
@@ -1079,9 +1079,9 @@ setalarmwindow.o: setalarmwindow.cpp setalarmwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setalarmwindow.o setalarmwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setalarmwindow.o src/setalarmwindow.cpp
 
-viewAlarm.o: viewAlarm.cpp viewAlarm.h \
+viewAlarm.o: src/viewAlarm.cpp include/viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qwidget.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QVBoxLayout \
@@ -1102,7 +1102,7 @@ viewAlarm.o: viewAlarm.cpp viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qfile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QTextStream \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtextstream.h \
-		alarm_details.h \
+		include/alarm_details.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
@@ -1114,9 +1114,9 @@ viewAlarm.o: viewAlarm.cpp viewAlarm.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QHBoxLayout \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QDebug \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qdebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o viewAlarm.o viewAlarm.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o viewAlarm.o src/viewAlarm.cpp
 
-alarm_details.o: alarm_details.cpp alarm_details.h \
+alarm_details.o: src/alarm_details.cpp include/alarm_details.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QDialog \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QTimeEdit \
@@ -1131,7 +1131,7 @@ alarm_details.o: alarm_details.cpp alarm_details.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qlineedit.h \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/QComboBox \
 		/opt/homebrew/Cellar/qt@5/5.15.16/lib/QtWidgets.framework/Headers/qcombobox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o alarm_details.o alarm_details.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o alarm_details.o src/alarm_details.cpp
 
 moc_clockwidget.o: moc_clockwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clockwidget.o moc_clockwidget.cpp

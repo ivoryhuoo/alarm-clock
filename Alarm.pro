@@ -2,17 +2,19 @@ QT += core gui widgets
 
 CONFIG -= app_bundle
 
-SOURCES += main.cpp \
-           clockwidget.cpp \
-           mainwindow.cpp \
-           setalarmwindow.cpp \
-           viewAlarm.cpp \
-           alarm_details.cpp
+INCLUDEPATH += include
 
-HEADERS += clockwidget.h \
-           mainwindow.h \
-           setalarmwindow.h \
-           viewAlarm.h \
-           alarm_details.h
+SOURCES += main.cpp \
+           src/clockwidget.cpp \
+           src/mainwindow.cpp \
+           src/setalarmwindow.cpp \
+           src/viewAlarm.cpp \
+           src/alarm_details.cpp
+
+HEADERS += include/clockwidget.h \
+           include/mainwindow.h \
+           include/setalarmwindow.h \
+           include/viewAlarm.h \
+           include/alarm_details.h
 
 # RESOURCES += resources.qrc
