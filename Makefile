@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Library/Developer/CommandLineTools/usr/bin/clang
 CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
-INCPATH       = -I. -Iinclude -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
+INCPATH       = -I. -Iinclude -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
 QMAKE         = /opt/homebrew/opt/qt/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = Alarm1.0.0
 DISTDIR = /Users/tsidkenutomori/group27/.tmp/Alarm1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/opt/homebrew/lib
-LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtWidgets -framework QtMultimedia -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtNetwork -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -57,7 +57,8 @@ SOURCES       = main.cpp \
 		src/mainwindow.cpp \
 		src/setalarmwindow.cpp \
 		src/viewAlarm.cpp \
-		src/alarm_details.cpp moc_clockwidget.cpp \
+		src/alarm_details.cpp qrc_resources.cpp \
+		moc_clockwidget.cpp \
 		moc_mainwindow.cpp \
 		moc_setalarmwindow.cpp \
 		moc_viewAlarm.cpp \
@@ -68,6 +69,7 @@ OBJECTS       = main.o \
 		setalarmwindow.o \
 		viewAlarm.o \
 		alarm_details.o \
+		qrc_resources.o \
 		moc_clockwidget.o \
 		moc_mainwindow.o \
 		moc_setalarmwindow.o \
@@ -833,8 +835,11 @@ Makefile: Alarm.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt/ho
 		/opt/homebrew/share/qt/mkspecs/features/yacc.prf \
 		/opt/homebrew/share/qt/mkspecs/features/lex.prf \
 		Alarm.pro \
+		resources.qrc \
 		/opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl \
+		/opt/homebrew/lib/QtMultimedia.framework/Resources/QtMultimedia.prl \
 		/opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl \
+		/opt/homebrew/lib/QtNetwork.framework/Resources/QtNetwork.prl \
 		/opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile Alarm.pro
 /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf:
@@ -1201,8 +1206,11 @@ Makefile: Alarm.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt/ho
 /opt/homebrew/share/qt/mkspecs/features/yacc.prf:
 /opt/homebrew/share/qt/mkspecs/features/lex.prf:
 Alarm.pro:
+resources.qrc:
 /opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl:
+/opt/homebrew/lib/QtMultimedia.framework/Resources/QtMultimedia.prl:
 /opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl:
+/opt/homebrew/lib/QtNetwork.framework/Resources/QtNetwork.prl:
 /opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile Alarm.pro
@@ -1218,6 +1226,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents include/clockwidget.h include/mainwindow.h include/setalarmwindow.h include/viewAlarm.h include/alarm_details.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp src/clockwidget.cpp src/mainwindow.cpp src/setalarmwindow.cpp src/viewAlarm.cpp src/alarm_details.cpp $(DISTDIR)/
@@ -1247,8 +1256,16 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp
+qrc_resources.cpp: resources.qrc \
+		/opt/homebrew/share/qt/libexec/rcc \
+		sounds/ring2.wav \
+		sounds/ring1.wav \
+		sounds/ring3.wav
+	/opt/homebrew/share/qt/libexec/rcc -name resources resources.qrc -o qrc_resources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -1277,7 +1294,7 @@ moc_clockwidget.cpp: include/clockwidget.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlabel.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/clockwidget.h -o moc_clockwidget.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/clockwidget.h -o moc_clockwidget.cpp
 
 moc_mainwindow.cpp: include/mainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -1323,7 +1340,7 @@ moc_mainwindow.cpp: include/mainwindow.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/mainwindow.h -o moc_mainwindow.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/mainwindow.h -o moc_mainwindow.cpp
 
 moc_setalarmwindow.cpp: include/setalarmwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QDialog \
@@ -1342,7 +1359,7 @@ moc_setalarmwindow.cpp: include/setalarmwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qcombobox.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/setalarmwindow.h -o moc_setalarmwindow.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/setalarmwindow.h -o moc_setalarmwindow.cpp
 
 moc_viewAlarm.cpp: include/viewAlarm.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
@@ -1367,7 +1384,7 @@ moc_viewAlarm.cpp: include/viewAlarm.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qtextstream.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/viewAlarm.h -o moc_viewAlarm.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/viewAlarm.h -o moc_viewAlarm.cpp
 
 moc_alarm_details.cpp: include/alarm_details.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QDialog \
@@ -1386,7 +1403,7 @@ moc_alarm_details.cpp: include/alarm_details.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qcombobox.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/alarm_details.h -o moc_alarm_details.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/tsidkenutomori/group27/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/tsidkenutomori/group27 -I/Users/tsidkenutomori/group27/include -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/16/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib include/alarm_details.h -o moc_alarm_details.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1402,7 +1419,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -1585,6 +1602,9 @@ alarm_details.o: src/alarm_details.cpp include/alarm_details.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QComboBox \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qcombobox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o alarm_details.o src/alarm_details.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
 moc_clockwidget.o: moc_clockwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clockwidget.o moc_clockwidget.cpp

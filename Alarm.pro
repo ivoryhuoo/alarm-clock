@@ -1,6 +1,8 @@
 QT += core gui widgets
+QT += multimedia
 
 CONFIG -= app_bundle
+CONFIG += c++17
 
 INCLUDEPATH += include
 
@@ -17,4 +19,4 @@ HEADERS += include/clockwidget.h \
            include/viewAlarm.h \
            include/alarm_details.h
 
-# RESOURCES += resources.qrc
+RESOURCES += resources.qrc
