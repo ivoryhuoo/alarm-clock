@@ -59,13 +59,14 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
  * @param newAlarms A list of QTime objects representing the alarm times.
  * @param newLabels A list of QString objects representing the alarm labels.
  */
-
-void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels) {
+void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels, const QList<QString> &newRepeats) {
     qDebug() << "Updating alarm list. Total alarms:" << newAlarms.size();
 
     // Update stored alarm lists
     alarms = newAlarms;
     alarmLabels = newLabels;
+    alarmRepeats = newRepeats;
+
 
     // Clear old buttons
     QLayoutItem *child;
@@ -110,13 +111,15 @@ void ViewAlarm::handleAlarmClick() {
         QTime alarmTime = alarms[index];
 
         // Open AlarmDetails with real alarm values
-        AlarmDetails *detailsWindow = new AlarmDetails(alarmTime, "Never", alarmLabel, "Default", this);
+        QString repeat = alarmRepeats[index];
+        AlarmDetails *detailsWindow = new AlarmDetails(alarmTime, repeat, alarmLabel, "Default", this);
+
 
         // Connect modifications
         connect(detailsWindow, &AlarmDetails::alarmModified, this, [=](QTime newTime, QString newRepeat, QString newLabel, QString newSound) {
             alarms[index] = newTime;
             alarmLabels[index] = newLabel;
-            updateAlarmList(alarms, alarmLabels);
+            updateAlarmList(alarms, alarmLabels, alarmRepeats);
         });
 
         // Connect deletions
@@ -154,5 +157,6 @@ void ViewAlarm::removeAlarm(const QString &alarmLabel) {
         }
     }
 
-    updateAlarmList(alarms, alarmLabels);
+    updateAlarmList(alarms, alarmLabels, alarmRepeats);
+
 }

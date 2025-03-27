@@ -64,6 +64,6 @@ private:
     QComboBox *soundComboBox;   ///< Sound selection widget. 
     QPushButton *saveButton;     ///< Button to save the alarm. 
     QLabel *errorLabel;         ///< Label to display error messages. 
-}
+};
 
 #endif // SETALARMWINDOW_H

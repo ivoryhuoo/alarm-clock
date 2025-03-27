@@ -98,6 +98,8 @@ private:
 
     QList<QTime> alarms; /**< List of active alarm times */
     QList<QString> alarmLabels; /**< List of labels associated with alarms */
+    QList<QString> alarmRepeats; // Stores repeat settings
+
 
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
 };

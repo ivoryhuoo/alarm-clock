@@ -83,11 +83,13 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
 
     alarms.append(time);
     alarmLabels.append(label);
+    alarmRepeats.append(repeat); 
 
     if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms, alarmLabels);
+        viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats); 
     }
 }
+
 
 /**
  * @brief Opens the View Alarms window.
@@ -101,7 +103,7 @@ void MainWindow::openViewAlarms() {
         viewAlarmWindow = new ViewAlarm(this);
     }
 
-    viewAlarmWindow->updateAlarmList(alarms, alarmLabels); // Update with latest alarms
+    viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats); // Update with latest alarms
     viewAlarmWindow->show();
 }
 
@@ -157,6 +159,6 @@ void MainWindow::snoozeAlarm(int index, int minutes) {
     qDebug() << "Alarm snoozed until" << snoozedTime.toString("HH:mm");
 
     if (viewAlarmWindow) {
-        viewAlarmWindow->updateAlarmList(alarms, alarmLabels);
+        viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats);
     }
 }

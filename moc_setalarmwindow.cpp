@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "setalarmwindow.h"
+#include "include/setalarmwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
