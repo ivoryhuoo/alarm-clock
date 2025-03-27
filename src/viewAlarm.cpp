@@ -59,14 +59,8 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
  * @param newAlarms A list of QTime objects representing the alarm times.
  * @param newLabels A list of QString objects representing the alarm labels.
  */
-void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels, const QList<QString> &newRepeats) {
+void ViewAlarm::updateAlarmList(const QList<Alarm> &newAlarms) {
     qDebug() << "Updating alarm list. Total alarms:" << newAlarms.size();
-
-    // Update stored alarm lists
-    alarms = newAlarms;
-    alarmLabels = newLabels;
-    alarmRepeats = newRepeats;
-
 
     // Clear old buttons
     QLayoutItem *child;
@@ -79,14 +73,14 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QStri
     alarmButtons.clear();
 
     // Add each alarm as a separate button
-    for (int i = 0; i < alarms.size(); ++i) {
-        QString alarmText = alarmLabels[i] + " - " + alarms[i].toString("HH:mm");
+    for (int i = 0; i < newAlarms.size(); ++i) {
+        QString alarmText = newAlarms[i].label + " - " + newAlarms[i].time.toString("HH:mm");
 
         QPushButton *alarmButton = new QPushButton(alarmText, this);
         alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 10px; }");
         connect(alarmButton, &QPushButton::clicked, this, &ViewAlarm::handleAlarmClick);
 
-        alarmButtons.insert(alarmButton, alarmLabels[i]); // Store button-label mapping
+        alarmButtons.insert(alarmButton, newAlarms[i]); // Store button-label mapping
         alarmsLayout->addWidget(alarmButton);
     }
 }
@@ -99,36 +93,40 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QStri
  * dialog, allowing the user to modify or delete the alarm.
  */
 
-void ViewAlarm::handleAlarmClick() {
+ void ViewAlarm::handleAlarmClick() {
     QPushButton *senderButton = qobject_cast<QPushButton*>(sender());
     if (senderButton && alarmButtons.contains(senderButton)) {
-        QString alarmLabel = alarmButtons.value(senderButton);
-        qDebug() << "Alarm clicked:" << alarmLabel;
+        // Get the full Alarm object from the button mapping
+        Alarm alarm = alarmButtons.value(senderButton);
+        qDebug() << "Alarm clicked:" << alarm.toString();
 
-        int index = alarmLabels.indexOf(alarmLabel);
-        if (index == -1) return; // If alarm is not found, return
-
-        QTime alarmTime = alarms[index];
-
-        // Open AlarmDetails with real alarm values
-        QString repeat = alarmRepeats[index];
-        AlarmDetails *detailsWindow = new AlarmDetails(alarmTime, repeat, alarmLabel, "Default", this);
-
+        // Open AlarmDetails with the complete alarm data
+        AlarmDetails *detailsWindow = new AlarmDetails(
+            alarm.time,
+            alarm.repeat,
+            alarm.label,
+            alarm.sound,  // Now using the actual sound from struct
+            this
+        );
 
         // Connect modifications
         connect(detailsWindow, &AlarmDetails::alarmModified, this, [=](QTime newTime, QString newRepeat, QString newLabel, QString newSound) {
-            alarms[index] = newTime;
-            alarmLabels[index] = newLabel;
-            updateAlarmList(alarms, alarmLabels, alarmRepeats);
+            // Create updated alarm struct
+            Alarm updatedAlarm = alarm;
+            updatedAlarm.time = newTime;
+            updatedAlarm.repeat = newRepeat;
+            updatedAlarm.label = newLabel;
+            updatedAlarm.sound = newSound;
+            
+            emit alarmModified(updatedAlarm);  // Emit signal with complete struct
         });
 
-        // Connect deletions
+        // Connect deletions (unchanged)
         connect(detailsWindow, &AlarmDetails::alarmDeleted, this, &ViewAlarm::removeAlarm);
 
         detailsWindow->exec();
     }
 }
-
 
 /**
  * @brief Removes an alarm from the UI and the stored list.
@@ -140,23 +138,18 @@ void ViewAlarm::handleAlarmClick() {
  */
 
 void ViewAlarm::removeAlarm(const QString &alarmLabel) {
-    qDebug() << "Removing alarm:" << alarmLabel;
-
-    int index = alarmLabels.indexOf(alarmLabel);
-    if (index == -1) return;
-
-    alarms.removeAt(index);
-    alarmLabels.removeAt(index);
-
-    // Remove from UI
+    // Find and remove the alarm from the buttons map
     for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
-        if (it.value() == alarmLabel) {
-            delete it.key(); // Delete the button
+        if (it.value().label == alarmLabel) {  // Compare against the alarm's label
+            qDebug() << "Removing alarm:" << alarmLabel;
+            
+            // Delete the button widget
+            delete it.key();
             alarmButtons.erase(it);
+            
+            // Emit signal to notify MainWindow
+            emit alarmDeleted(alarmLabel);
             break;
         }
     }
-
-    updateAlarmList(alarms, alarmLabels, alarmRepeats);
-
 }
