@@ -52,7 +52,8 @@ public:
      * @param labels List of alarm labels.
      */
 
-    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels, const QList<QString> &repeats);
+    void updateAlarmList(const QList<QTime> &alarms, const QList<QString> &labels, const QList<QString> &repeats, const QList<bool> &isSnoozed);
+
 
 private:
     QVBoxLayout *alarmsLayout; /**< Layout to hold alarm buttons */
@@ -60,6 +61,11 @@ private:
     QList<QTime> alarms; /**< Stores alarm times */
     QList<QString> alarmLabels; /**< Stores alarm labels */
     QList<QString> alarmRepeats; /**< Stores alarm repeat settings */
+    QList<bool> alarmIsSnoozed;  // Add this to the private section
+
+signals:
+    void alarmModified(int index, QTime newTime, QString newRepeat, QString newLabel, QString newSound);
+    void alarmDeleted(const QString &label);
 
 
 private slots:
@@ -79,5 +85,6 @@ private slots:
      */
     void removeAlarm(const QString &alarmLabel);
 };
+
 
 #endif // VIEWALARM_H

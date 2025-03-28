@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QTimer>  
+#include <QSet>
 #include "clockwidget.h"
 #include "setalarmwindow.h"
 #include "viewAlarm.h"
@@ -95,13 +96,12 @@ private:
     QPushButton *viewAlarmsButton; /**< Button to open the View Alarms window */
     ViewAlarm *viewAlarmWindow; /**< Pointer to the View Alarm window */
     ClockWidget *clockWidget; /**< Widget displaying the current time */
-
     QList<QTime> alarms; /**< List of active alarm times */
     QList<QString> alarmLabels; /**< List of labels associated with alarms */
     QList<QString> alarmRepeats; // Stores repeat settings
-
-
+    QSet<QString> dismissedToday; // Track dismissed alarms (by label + date)
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
+    QList<bool> alarmIsSnoozed; // Boolean for snoozing an alarm
 };
 
 #endif // MAINWINDOW_H

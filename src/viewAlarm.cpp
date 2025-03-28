@@ -59,14 +59,11 @@ ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
  * @param newAlarms A list of QTime objects representing the alarm times.
  * @param newLabels A list of QString objects representing the alarm labels.
  */
-void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels, const QList<QString> &newRepeats) {
-    qDebug() << "Updating alarm list. Total alarms:" << newAlarms.size();
-
-    // Update stored alarm lists
+void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QString> &newLabels, const QList<QString> &newRepeats, const QList<bool> &isSnoozed) {
     alarms = newAlarms;
     alarmLabels = newLabels;
     alarmRepeats = newRepeats;
-
+    alarmIsSnoozed = isSnoozed;
 
     // Clear old buttons
     QLayoutItem *child;
@@ -78,18 +75,26 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QStri
     }
     alarmButtons.clear();
 
-    // Add each alarm as a separate button
     for (int i = 0; i < alarms.size(); ++i) {
-        QString alarmText = alarmLabels[i] + " - " + alarms[i].toString("HH:mm");
+        QString alarmText = alarmLabels[i];
+
+        // Only add (Snoozed) if not already in the label
+        if (isSnoozed[i] && !alarmText.contains("(Snoozed)")) {
+            alarmText += " (Snoozed)";
+        }
+
+        alarmText += " - " + alarms[i].toString("HH:mm");
+
 
         QPushButton *alarmButton = new QPushButton(alarmText, this);
         alarmButton->setStyleSheet("QPushButton { background-color: #bb86fc; color: white; border-radius: 5px; padding: 10px; }");
         connect(alarmButton, &QPushButton::clicked, this, &ViewAlarm::handleAlarmClick);
 
-        alarmButtons.insert(alarmButton, alarmLabels[i]); // Store button-label mapping
+        alarmButtons.insert(alarmButton, alarmLabels[i]);
         alarmsLayout->addWidget(alarmButton);
     }
 }
+
 
 
 /**
@@ -114,13 +119,32 @@ void ViewAlarm::handleAlarmClick() {
         QString repeat = alarmRepeats[index];
         AlarmDetails *detailsWindow = new AlarmDetails(alarmTime, repeat, alarmLabel, "Default", this);
 
-
         // Connect modifications
-        connect(detailsWindow, &AlarmDetails::alarmModified, this, [=](QTime newTime, QString newRepeat, QString newLabel, QString newSound) {
+        connect(detailsWindow, &AlarmDetails::alarmModified, this, [=, &index](QTime newTime, QString newRepeat, QString newLabel, QString newSound) {
+            qDebug() << "[VIEW ALARM] Received newRepeat:" << newRepeat;
+
             alarms[index] = newTime;
+            alarmRepeats[index] = newRepeat;
             alarmLabels[index] = newLabel;
-            updateAlarmList(alarms, alarmLabels, alarmRepeats);
+
+            qDebug() << "[VIEW ALARM] alarmRepeats[" << index << "] after update:" << alarmRepeats[index];
+            qDebug() << "[VIEW ALARM] Full alarmRepeats list:" << alarmRepeats;
+
+            QString oldLabel = alarmLabels[index];
+            alarmLabels[index] = newLabel;
+
+            for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
+                if (it.value() == oldLabel) {
+                    alarmButtons[it.key()] = newLabel;
+                    break;
+                }
+            }
+
+            emit alarmModified(index, newTime, newRepeat, newLabel, newSound);
+
         });
+
+
 
         // Connect deletions
         connect(detailsWindow, &AlarmDetails::alarmDeleted, this, &ViewAlarm::removeAlarm);
@@ -147,16 +171,18 @@ void ViewAlarm::removeAlarm(const QString &alarmLabel) {
 
     alarms.removeAt(index);
     alarmLabels.removeAt(index);
+    alarmRepeats.removeAt(index);  
 
-    // Remove from UI
     for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
         if (it.value() == alarmLabel) {
-            delete it.key(); // Delete the button
+            delete it.key(); 
             alarmButtons.erase(it);
             break;
         }
     }
 
-    updateAlarmList(alarms, alarmLabels, alarmRepeats);
+    emit alarmDeleted(alarmLabel); // <-- Add this line
 
+    updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
 }
+

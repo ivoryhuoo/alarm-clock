@@ -10,6 +10,8 @@
  */
 
 #include "alarm_details.h"
+#include <QDebug>
+
 
 /**
  * @brief Constructs the AlarmDetails window.
@@ -89,6 +91,7 @@ AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString so
  */
 
 void AlarmDetails::modifyAlarm() {
+    qDebug() << "[MODIFY ALARM WINDOW] Emitting repeat value:" << repeatComboBox->currentText();
     emit alarmModified(timeEdit->time(), repeatComboBox->currentText(), labelEdit->text(), soundComboBox->currentText());
     close(); // Close the dialog
 }

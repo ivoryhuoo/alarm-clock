@@ -1,57 +1,53 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'clockwidget.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.8.2)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.16)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "include/clockwidget.h"
-#include <QtGui/qtextcursor.h>
-#include <QtCore/qmetatype.h>
-
-#include <QtCore/qtmochelpers.h>
-
 #include <memory>
-
-
-#include <QtCore/qxptype_traits.h>
+#include "include/clockwidget.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'clockwidget.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.8.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.15.16. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
-#ifndef Q_CONSTINIT
-#define Q_CONSTINIT
-#endif
-
+QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-QT_WARNING_DISABLE_GCC("-Wuseless-cast")
-namespace {
-struct qt_meta_tag_ZN11ClockWidgetE_t {};
-} // unnamed namespace
+struct qt_meta_stringdata_ClockWidget_t {
+    QByteArrayData data[5];
+    char stringdata0[50];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_ClockWidget_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_ClockWidget_t qt_meta_stringdata_ClockWidget = {
+    {
+QT_MOC_LITERAL(0, 0, 11), // "ClockWidget"
+QT_MOC_LITERAL(1, 12, 10), // "updateTime"
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 14), // "changeTimezone"
+QT_MOC_LITERAL(4, 39, 10) // "timezoneId"
 
-
-#ifdef QT_MOC_HAS_STRINGDATA
-static constexpr auto qt_meta_stringdata_ZN11ClockWidgetE = QtMocHelpers::stringData(
-    "ClockWidget",
-    "updateTime",
-    "",
-    "changeTimezone",
+    },
+    "ClockWidget\0updateTime\0\0changeTimezone\0"
     "timezoneId"
-);
-#else  // !QT_MOC_HAS_STRINGDATA
-#error "qtmochelpers.h not found or too old."
-#endif // !QT_MOC_HAS_STRINGDATA
+};
+#undef QT_MOC_LITERAL
 
-Q_CONSTINIT static const uint qt_meta_data_ZN11ClockWidgetE[] = {
+static const uint qt_meta_data_ClockWidget[] = {
 
  // content:
-      12,       // revision
+       8,       // revision
        0,       // classname
        0,    0, // classinfo
        2,   14, // methods
@@ -61,9 +57,9 @@ Q_CONSTINIT static const uint qt_meta_data_ZN11ClockWidgetE[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x08,    1 /* Private */,
-       3,    1,   27,    2, 0x08,    2 /* Private */,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   24,    2, 0x08 /* Private */,
+       3,    1,   25,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -72,35 +68,28 @@ Q_CONSTINIT static const uint qt_meta_data_ZN11ClockWidgetE[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject ClockWidget::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_ZN11ClockWidgetE.offsetsAndSizes,
-    qt_meta_data_ZN11ClockWidgetE,
-    qt_static_metacall,
-    nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_tag_ZN11ClockWidgetE_t,
-        // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<ClockWidget, std::true_type>,
-        // method 'updateTime'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'changeTimezone'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
-    >,
-    nullptr
-} };
-
 void ClockWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    auto *_t = static_cast<ClockWidget *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<ClockWidget *>(_o);
+        (void)_t;
         switch (_id) {
         case 0: _t->updateTime(); break;
-        case 1: _t->changeTimezone((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 1: _t->changeTimezone((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
 }
+
+QT_INIT_METAOBJECT const QMetaObject ClockWidget::staticMetaObject = { {
+    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    qt_meta_stringdata_ClockWidget.data,
+    qt_meta_data_ClockWidget,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
 
 const QMetaObject *ClockWidget::metaObject() const
 {
@@ -110,7 +99,7 @@ const QMetaObject *ClockWidget::metaObject() const
 void *ClockWidget::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ZN11ClockWidgetE.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ClockWidget.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
@@ -124,12 +113,12 @@ int ClockWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 2;
-    }
-    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 2)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 2;
     }
     return _id;
 }
 QT_WARNING_POP
+QT_END_MOC_NAMESPACE
