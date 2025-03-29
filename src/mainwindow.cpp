@@ -160,6 +160,10 @@ void MainWindow::checkAlarms() {
 
         if (msgBox.clickedButton() == snoozeButton) {
             snoozeAlarm(i, 5);
+            stopAlarmSound();
+        }
+        else {
+            stopAlarmSound();
         }
 
         if (repeatOption == "Never" || isSnoozed) {
@@ -233,5 +237,18 @@ void MainWindow::playAlarmSound(const QString &soundName) {
     } else if (soundName == "Rooster") {
         soundPath = "sounds/ring3.wav";
     }
-    QSound::play(soundPath);
+
+    stopAlarmSound();
+
+    alarmPlayer = new QSound(soundPath, this);
+    alarmPlayer->setLoops(QSound::Infinite);  // Infinite loop
+    alarmPlayer->play();
+}
+
+void MainWindow::stopAlarmSound() {
+    if (alarmPlayer) {
+        alarmPlayer->stop();
+        delete alarmPlayer;
+        alarmPlayer = nullptr;
+    }
 }

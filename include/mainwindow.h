@@ -91,7 +91,8 @@ private slots:
      * @param minutes The number of minutes to snooze the alarm.
      */
     void snoozeAlarm(int index, int minutes);
-    void playAlarmSound(const QString &soundName);  
+    void playAlarmSound(const QString &soundName); 
+    void stopAlarmSound(); 
 
 private:
     QPushButton *setAlarmButton;  /**< Button to open the Set Alarm window */
@@ -102,6 +103,7 @@ private:
     QList<QString> alarmLabels; /**< List of labels associated with alarms */
     QList<QString> alarmRepeats; // Stores repeat settings
     QList<QString> alarmSounds;
+    QSound *alarmPlayer = nullptr;
     QSet<QString> dismissedToday; // Track dismissed alarms (by label + date)
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
     QList<bool> alarmIsSnoozed; // Boolean for snoozing an alarm
