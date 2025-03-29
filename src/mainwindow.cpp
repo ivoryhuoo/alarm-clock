@@ -13,7 +13,7 @@
  * - Snoozing and dismissing alarms via a message box.
  * 
  * @author Group 27
- * @date Friday, March 14
+ * @date Sunday, March 30
  */
 
 #include "mainwindow.h"
@@ -31,19 +31,23 @@
  * 
  * @param parent Pointer to the parent widget.
  */
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QWidget *centralWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-
     clockWidget = new ClockWidget(this);
+
+    // Create buttons for setting a new alarm and viewing the alarms
     setAlarmButton = new QPushButton("Set Alarm", this);
     viewAlarmsButton = new QPushButton("View Alarms", this);
 
     setAlarmButton->setMinimumHeight(40);
     viewAlarmsButton->setMinimumHeight(40);
 
+    // Initialize the viewAlarmWindow pointer to nullptr (it's used later for displaying active alarms)
     viewAlarmWindow = nullptr;
 
+    // Add the clock widget and buttons to the layout
     layout->addWidget(clockWidget);
     layout->addWidget(setAlarmButton);
     layout->addWidget(viewAlarmsButton);
@@ -104,7 +108,6 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
 
 /**
  * @brief Opens the View Alarms window.
- * 
  * Displays a list of all active alarms.
  */
 void MainWindow::openViewAlarms() {
@@ -133,10 +136,10 @@ void MainWindow::openViewAlarms() {
 
 /**
  * @brief Checks if any alarms match the current time and triggers an alert.
- * 
  * If an alarm matches the current system time, a message box is displayed with
  * options to snooze or dismiss the alarm.
  */
+
 void MainWindow::checkAlarms() {
     QTime currentTime = QTime::currentTime();
     QDate currentDate = QDate::currentDate();
@@ -162,7 +165,7 @@ void MainWindow::checkAlarms() {
 
         // Only check day of week if it's a repeating alarm
         if (repeatMap.contains(repeatOption) && repeatMap[repeatOption] != today) {
-            continue;  // Not the right day
+            continue;  
         }
 
         // Still suppress if dismissed today (one-time suppression)
@@ -275,6 +278,7 @@ void MainWindow::checkAlarms() {
  * @param index The index of the alarm to snooze.
  * @param minutes The number of minutes to snooze for.
  */
+
 void MainWindow::snoozeAlarm(int index, int minutes) {
     QString baseLabel = alarmLabels[index];
     if (baseLabel.contains(" (Snoozed)")) {
@@ -321,10 +325,20 @@ void MainWindow::snoozeAlarm(int index, int minutes) {
     }
 }
 
-
+/**  
+ * @brief Plays the alarm sound based on the provided sound name.
+ * 
+ * This function selects an appropriate sound file based on the given sound name 
+ * and plays it in an infinite loop. If no sound is specified or an unrecognized 
+ * sound name is provided, no sound will be played.
+ * 
+ * @param soundName The name of the alarm sound to play. Possible values are: "Classic", "Beep", and "Rooster".
+ */
 
 void MainWindow::playAlarmSound(const QString &soundName) {
     QString soundPath;
+
+     // Determine the file path based on the provided sound name
     if (soundName == "Classic") {
         soundPath = "sounds/ring1.wav";
     } else if (soundName == "Beep") {
@@ -335,12 +349,22 @@ void MainWindow::playAlarmSound(const QString &soundName) {
 
     stopAlarmSound();
 
+    // Create a new QSound instance with the selected sound path
     alarmPlayer = new QSound(soundPath, this);
-    alarmPlayer->setLoops(QSound::Infinite);  // Infinite loop
+
+    alarmPlayer->setLoops(QSound::Infinite);  
     alarmPlayer->play();
 }
 
+/**
+ * @brief Stops the currently playing alarm sound.
+ * 
+ * This function stops the alarm sound, deletes the sound player instance, 
+ * and sets the player pointer to nullptr to release resources.
+ */
+
 void MainWindow::stopAlarmSound() {
+
     if (alarmPlayer) {
         alarmPlayer->stop();
         delete alarmPlayer;

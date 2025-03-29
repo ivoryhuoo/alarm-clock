@@ -95,19 +95,19 @@ private slots:
     void stopAlarmSound(); 
 
 private:
-    QPushButton *setAlarmButton;  /**< Button to open the Set Alarm window */
-    QPushButton *viewAlarmsButton; /**< Button to open the View Alarms window */
-    ViewAlarm *viewAlarmWindow; /**< Pointer to the View Alarm window */
-    ClockWidget *clockWidget; /**< Widget displaying the current time */
-    QList<QTime> alarms; /**< List of active alarm times */
-    QList<QString> alarmLabels; /**< List of labels associated with alarms */
-    QList<QString> alarmRepeats; // Stores repeat settings
-    QList<QString> alarmSounds;
-    QSound *alarmPlayer = nullptr;
-    QSet<QString> dismissedToday; // Track dismissed alarms (by label + date)
-    QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
-    QList<bool> alarmIsSnoozed; // Boolean for snoozing an alarm
-    QVector<QTime> originalAlarmTimes; // Keep track of original alarm time set 
+    QPushButton *setAlarmButton;  //< Button to open the Set Alarm window 
+    QPushButton *viewAlarmsButton; //< Button to open the View Alarms window 
+    ViewAlarm *viewAlarmWindow; //< Pointer to the View Alarm window 
+    ClockWidget *clockWidget; //< Widget displaying the current time 
+    QList<QTime> alarms; //< List of active alarm times 
+    QList<QString> alarmLabels; //< List of labels associated with alarms 
+    QList<QString> alarmRepeats; //<Stores repeat setting
+    QList<QString> alarmSounds; //< Stores sound choices for alarms
+    QSound *alarmPlayer = nullptr; //< Pointer to the QSound object that plays the alarm sound
+    QSet<QString> dismissedToday; //<Track dismissed alarms (by label + date)
+    QTimer *alarmCheckTimer; //< Timer that checks alarms every second 
+    QList<bool> alarmIsSnoozed; //< Boolean for snoozing an alarm
+    QVector<QTime> originalAlarmTimes; //< Keep track of original alarm time set 
 };
 
 #endif // MAINWINDOW_H
