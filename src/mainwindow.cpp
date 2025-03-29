@@ -38,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     clockWidget = new ClockWidget(this);
     setAlarmButton = new QPushButton("Set Alarm", this);
     viewAlarmsButton = new QPushButton("View Alarms", this);
+
+    setAlarmButton->setMinimumHeight(40);
+    viewAlarmsButton->setMinimumHeight(40);
+
     viewAlarmWindow = nullptr;
 
     layout->addWidget(clockWidget);
@@ -52,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     alarmCheckTimer->start(1000);  // Check every second
 
     setCentralWidget(centralWidget);
+    this->resize(400, 300);
 }
 
 /**
@@ -83,6 +88,7 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
              << "| Sound:" << sound;
 
     alarms.append(time);
+    originalAlarmTimes.append(time);
     alarmLabels.append(label);
     alarmRepeats.append(repeat);
     alarmSounds.append(sound);
@@ -137,16 +143,33 @@ void MainWindow::checkAlarms() {
     int currentHour = currentTime.hour();
     int currentMinute = currentTime.minute();
 
+    // Check if today's the correct day for this repeating alarm
+    Qt::DayOfWeek today = static_cast<Qt::DayOfWeek>(currentDate.dayOfWeek());
+    static const QMap<QString, Qt::DayOfWeek> repeatMap = {
+        {"Every Sunday", Qt::Sunday}, {"Every Monday", Qt::Monday},
+        {"Every Tuesday", Qt::Tuesday}, {"Every Wednesday", Qt::Wednesday},
+        {"Every Thursday", Qt::Thursday}, {"Every Friday", Qt::Friday},
+        {"Every Saturday", Qt::Saturday}
+    };
+
     for (int i = 0; i < alarms.size(); ++i) {
+
     if (alarms[i].hour() == currentHour && alarms[i].minute() == currentMinute) {
         QString repeatOption = alarmRepeats[i];
         QString label = alarmLabels[i];
         QString sound = alarmSounds[i];
         bool isSnoozed = alarmIsSnoozed[i];
 
-        // Suppress repeat alarms if dismissed today
+        // Only check day of week if it's a repeating alarm
+        if (repeatMap.contains(repeatOption) && repeatMap[repeatOption] != today) {
+            continue;  // Not the right day
+        }
+
+        // Still suppress if dismissed today (one-time suppression)
         QString uniqueKey = label + "|" + currentDate.toString("yyyy-MM-dd");
-        if (dismissedToday.contains(uniqueKey)) continue;
+        if (dismissedToday.contains(uniqueKey) && !isSnoozed) continue;
+
+        qDebug() << "[TRIGGER] Alarm triggered:" << label << "| Time:" << alarms[i].toString("HH:mm");
 
         // Play sound
         playAlarmSound(sound);
@@ -159,46 +182,88 @@ void MainWindow::checkAlarms() {
         msgBox.exec();
 
         if (msgBox.clickedButton() == snoozeButton) {
-            snoozeAlarm(i, 1);
             stopAlarmSound();
-        }
-        else {
-            stopAlarmSound();
-        }
 
-        if (repeatOption == "Never" || isSnoozed) {
-            alarms.removeAt(i);
-            alarmLabels.removeAt(i);
-            alarmRepeats.removeAt(i);
-            alarmSounds.removeAt(i);
-            alarmIsSnoozed.removeAt(i);
-        } else {
-            dismissedToday.insert(uniqueKey);
+            if (alarmRepeats[i] == "Never") {
+                qDebug() << "[SNOOZE] Removing one-time alarm after snooze:" << label;
 
-            static const QMap<QString, Qt::DayOfWeek> repeatMap = {
-                {"Every Sunday", Qt::Sunday}, {"Every Monday", Qt::Monday},
-                {"Every Tuesday", Qt::Tuesday}, {"Every Wednesday", Qt::Wednesday},
-                {"Every Thursday", Qt::Thursday}, {"Every Friday", Qt::Friday},
-                {"Every Saturday", Qt::Saturday}
-            };
+                // Remove original before snoozing to prevent duplicates
+                alarms.removeAt(i);
+                alarmLabels.removeAt(i);
+                alarmRepeats.removeAt(i);
+                alarmSounds.removeAt(i);
+                alarmIsSnoozed.removeAt(i);
+                originalAlarmTimes.removeAt(i);
 
-            if (repeatMap.contains(repeatOption)) {
-                QDate nextDate = currentDate.addDays(7);
-                QDateTime nextAlarmDateTime(nextDate, alarms[i]);
-                qDebug() << "[DEBUG] Dismissed repeat alarm:" << label
-                         << "— next scheduled for" << nextAlarmDateTime.toString();
+                // Clean up label to avoid "(Snoozed) (Snoozed)" stacking
+                if (label.contains(" (Snoozed)")) {
+                    label = label.section(" (Snoozed)", 0, 0);
+                }
+
+                // Then snooze manually (since index i is now invalid)
+                QTime snoozedTime = currentTime.addSecs(60); // 1-minute snooze
+                alarms.append(snoozedTime);
+                alarmLabels.append(label + " (Snoozed)");
+                alarmRepeats.append("Never");
+                alarmSounds.append(sound);
+                alarmIsSnoozed.append(true);
+                originalAlarmTimes.append(currentTime); // Keep the original
+                qDebug() << "[SNOOZE] Added new snoozed alarm for" << label << "at" << snoozedTime.toString("HH:mm");
+
+                if (viewAlarmWindow) {
+                    viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
+                }
+
+            } else {
+                snoozeAlarm(i, 1);
+                QString uniqueKey = label + "|" + currentDate.toString("yyyy-MM-dd");
+                dismissedToday.insert(uniqueKey);
+
+                QString repeatDay = repeatOption;
+                repeatDay.remove("Every ");
+                qDebug() << "[INFO] Original alarm will repeat every"
+                        << repeatDay << "at"
+                        << originalAlarmTimes[i].toString("HH:mm");
             }
+
+            return;
         }
 
-        if (viewAlarmWindow) {
-            viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
+
+
+        else if (msgBox.clickedButton() == dismissButton) {
+            stopAlarmSound();
+            qDebug() << "[DISMISS] Alarm dismissed:" << label;
+
+            // Handle non-repeating and repeating alarms only on dismiss
+            if (repeatOption == "Never" || isSnoozed) {
+                alarms.removeAt(i);
+                alarmLabels.removeAt(i);
+                alarmRepeats.removeAt(i);
+                alarmSounds.removeAt(i);
+                alarmIsSnoozed.removeAt(i);
+            } else {
+                dismissedToday.insert(uniqueKey);
+
+                if (repeatMap.contains(repeatOption)) {
+                    QDate nextDate = currentDate.addDays(7);
+                    QDateTime nextAlarmDateTime(nextDate, alarms[i]);
+                    qDebug() << "[DEBUG] Dismissed repeat alarm:" << label
+                            << "— next scheduled for" << nextAlarmDateTime.toString();
+                }
+
+            }
+            
+
+            if (viewAlarmWindow) {
+                viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
+            }
+
+            continue; 
         }
 
-        return; 
     }
-}
-
-
+    }
 }
 
 
@@ -211,22 +276,52 @@ void MainWindow::checkAlarms() {
  * @param minutes The number of minutes to snooze for.
  */
 void MainWindow::snoozeAlarm(int index, int minutes) {
-    QTime snoozedTime = alarms[index].addSecs(minutes * 60);
-    
+    QString baseLabel = alarmLabels[index];
+    if (baseLabel.contains(" (Snoozed)")) {
+        baseLabel = baseLabel.section(" (Snoozed)", 0, 0);
+    }
+
+    // Remove all existing snoozed versions of this alarm
+    for (int i = alarms.size() - 1; i >= 0; --i) {
+        QString currentLabel = alarmLabels[i];
+        if (currentLabel.startsWith(baseLabel) && alarmIsSnoozed[i]) {
+            qDebug() << "[SNOOZE] Removing old snoozed alarm:" << currentLabel;
+            alarms.removeAt(i);
+            alarmLabels.removeAt(i);
+            alarmRepeats.removeAt(i);
+            alarmSounds.removeAt(i);
+            alarmIsSnoozed.removeAt(i);
+            originalAlarmTimes.removeAt(i); 
+        }
+    }
+
+    // Add the new snoozed alarm
+    QTime snoozedTime = QTime::currentTime().addSecs(minutes * 60);
+
     alarms.append(snoozedTime);
-    alarmLabels.append(alarmLabels[index]); 
-
-
+    alarmLabels.append(baseLabel + " (Snoozed)");
     alarmRepeats.append(alarmRepeats[index]);
     alarmSounds.append(alarmSounds[index]);
     alarmIsSnoozed.append(true);
+    originalAlarmTimes.append(originalAlarmTimes[index]); 
 
-    qDebug() << "Alarm snoozed until" << snoozedTime.toString("HH:mm");
+    qDebug() << "[SNOOZE] Added new snoozed alarm for" << baseLabel << "at" << snoozedTime.toString("HH:mm");
 
     if (viewAlarmWindow) {
         viewAlarmWindow->updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
     }
+    // Show [INFO] about the original repeat time if it's a repeating alarm
+    QString repeatOption = alarmRepeats[index];
+    if (repeatOption != "Never" && repeatOption.startsWith("Every ")) {
+        QString repeatDay = repeatOption;
+        repeatDay.remove("Every ");
+        qDebug() << "[INFO] Original alarm will repeat every"
+                << repeatDay << "at"
+                << originalAlarmTimes[index].toString("HH:mm");
+    }
 }
+
+
 
 void MainWindow::playAlarmSound(const QString &soundName) {
     QString soundPath;

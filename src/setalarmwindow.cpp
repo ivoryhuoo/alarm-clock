@@ -24,6 +24,7 @@
 
 SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Set Alarm");
+    this->resize(400, 300);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
 

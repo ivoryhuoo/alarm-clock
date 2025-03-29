@@ -24,6 +24,8 @@
 
 ViewAlarm::ViewAlarm(QWidget *parent) : QWidget(parent) {
     setWindowTitle("View Alarms");
+    this->resize(400, 300);
+    
     setWindowFlags(Qt::Window);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
