@@ -133,12 +133,20 @@ void ViewAlarm::handleAlarmClick() {
             QString oldLabel = alarmLabels[index];
             alarmLabels[index] = newLabel;
 
+            alarms[index] = newTime;
+            alarmRepeats[index] = newRepeat;
+            alarmLabels[index] = newLabel;
+
+            // Update the button-to-label mapping
             for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
                 if (it.value() == oldLabel) {
                     alarmButtons[it.key()] = newLabel;
                     break;
                 }
             }
+
+            // Re-render the UI
+            updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
 
             emit alarmModified(index, newTime, newRepeat, newLabel, newSound);
 
