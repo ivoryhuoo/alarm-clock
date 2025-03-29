@@ -207,7 +207,7 @@ void MainWindow::checkAlarms() {
                 alarmRepeats.append("Never");
                 alarmSounds.append(sound);
                 alarmIsSnoozed.append(true);
-                originalAlarmTimes.append(currentTime); // Keep the original
+                originalAlarmTimes.append(originalAlarmTimes[i]);
                 qDebug() << "[SNOOZE] Added new snoozed alarm for" << label << "at" << snoozedTime.toString("HH:mm");
 
                 if (viewAlarmWindow) {
