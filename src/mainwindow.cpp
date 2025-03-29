@@ -21,6 +21,7 @@
 #include "viewAlarm.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QSound>
 
 /**
  * @brief Constructs the main application window.
@@ -83,7 +84,8 @@ void MainWindow::handleAlarmSet(QTime time, QString repeat, QString label, QStri
 
     alarms.append(time);
     alarmLabels.append(label);
-    alarmRepeats.append(repeat); 
+    alarmRepeats.append(repeat);
+    alarmSounds.append(sound);
     alarmIsSnoozed.append(false);
 
 
@@ -111,6 +113,7 @@ void MainWindow::openViewAlarms() {
             if (index != -1) {
                 alarms.removeAt(index);
                 alarmLabels.removeAt(index);
+                alarmSounds.removeAt(index);
                 alarmRepeats.removeAt(index);
             }
         });
@@ -138,11 +141,15 @@ void MainWindow::checkAlarms() {
     if (alarms[i].hour() == currentHour && alarms[i].minute() == currentMinute) {
         QString repeatOption = alarmRepeats[i];
         QString label = alarmLabels[i];
+        QString sound = alarmSounds[i];
         bool isSnoozed = alarmIsSnoozed[i];
 
         // Suppress repeat alarms if dismissed today
         QString uniqueKey = label + "|" + currentDate.toString("yyyy-MM-dd");
         if (dismissedToday.contains(uniqueKey)) continue;
+
+        // Play sound
+        playAlarmSound(sound);
 
         QMessageBox msgBox;
         msgBox.setWindowTitle("Alarm Triggered");
@@ -159,6 +166,7 @@ void MainWindow::checkAlarms() {
             alarms.removeAt(i);
             alarmLabels.removeAt(i);
             alarmRepeats.removeAt(i);
+            alarmSounds.removeAt(i);
             alarmIsSnoozed.removeAt(i);
         } else {
             dismissedToday.insert(uniqueKey);
@@ -206,6 +214,7 @@ void MainWindow::snoozeAlarm(int index, int minutes) {
 
 
     alarmRepeats.append(alarmRepeats[index]);
+    alarmSounds.append(alarmSounds[index]);
     alarmIsSnoozed.append(true);
 
     qDebug() << "Alarm snoozed until" << snoozedTime.toString("HH:mm");
@@ -215,4 +224,14 @@ void MainWindow::snoozeAlarm(int index, int minutes) {
     }
 }
 
-
+void MainWindow::playAlarmSound(const QString &soundName) {
+    QString soundPath;
+    if (soundName == "Classic") {
+        soundPath = "sounds/ring1.wav";
+    } else if (soundName == "Beep") {
+        soundPath = "sounds/ring2.wav";
+    } else if (soundName == "Rooster") {
+        soundPath = "sounds/ring3.wav";
+    }
+    QSound::play(soundPath);
+}

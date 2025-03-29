@@ -25,6 +25,7 @@
 #include <QTime>
 #include <QTimer>  
 #include <QSet>
+#include <QSound>
 #include "clockwidget.h"
 #include "setalarmwindow.h"
 #include "viewAlarm.h"
@@ -89,7 +90,8 @@ private slots:
      * @param index The index of the alarm in the list.
      * @param minutes The number of minutes to snooze the alarm.
      */
-    void snoozeAlarm(int index, int minutes);  
+    void snoozeAlarm(int index, int minutes);
+    void playAlarmSound(const QString &soundName);  
 
 private:
     QPushButton *setAlarmButton;  /**< Button to open the Set Alarm window */
@@ -99,6 +101,7 @@ private:
     QList<QTime> alarms; /**< List of active alarm times */
     QList<QString> alarmLabels; /**< List of labels associated with alarms */
     QList<QString> alarmRepeats; // Stores repeat settings
+    QList<QString> alarmSounds;
     QSet<QString> dismissedToday; // Track dismissed alarms (by label + date)
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
     QList<bool> alarmIsSnoozed; // Boolean for snoozing an alarm
