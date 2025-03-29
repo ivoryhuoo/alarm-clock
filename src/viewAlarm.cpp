@@ -1,5 +1,5 @@
 /**
- * @file ViewAlarm.cpp
+ * @file viewalarm.cpp
  * @brief The ViewAlarm class displays a list of active alarms in a scrollable window.
  * 
  * This class provides functionality to view, update, and delete alarms through an interactive UI.
@@ -16,9 +16,7 @@
 
 /**
  * @brief Constructs a ViewAlarm window.
- * 
  * Initializes the window with a scrollable list of alarms and a close button.
- * 
  * @param parent The parent widget (default is nullptr).
  */
 
@@ -107,7 +105,9 @@ void ViewAlarm::updateAlarmList(const QList<QTime> &newAlarms, const QList<QStri
  */
 
 void ViewAlarm::handleAlarmClick() {
+
     QPushButton *senderButton = qobject_cast<QPushButton*>(sender());
+
     if (senderButton && alarmButtons.contains(senderButton)) {
         QString alarmLabel = alarmButtons.value(senderButton);
         qDebug() << "Alarm clicked:" << alarmLabel;
@@ -166,23 +166,24 @@ void ViewAlarm::handleAlarmClick() {
 
 /**
  * @brief Removes an alarm from the UI and the stored list.
- * 
  * This method deletes the alarm from both the UI and the internal alarm list
  * when the user chooses to remove an alarm.
- * 
  * @param alarmLabel The label of the alarm to be removed.
  */
 
 void ViewAlarm::removeAlarm(const QString &alarmLabel) {
     qDebug() << "Removing alarm:" << alarmLabel;
 
+    // Find the index of the alarm in the list
     int index = alarmLabels.indexOf(alarmLabel);
     if (index == -1) return;
 
+    // Remove alarm details from lists
     alarms.removeAt(index);
     alarmLabels.removeAt(index);
     alarmRepeats.removeAt(index);  
 
+    // Remove the corresponding button from the UI
     for (auto it = alarmButtons.begin(); it != alarmButtons.end(); ++it) {
         if (it.value() == alarmLabel) {
             delete it.key(); 
@@ -191,8 +192,9 @@ void ViewAlarm::removeAlarm(const QString &alarmLabel) {
         }
     }
 
-    emit alarmDeleted(alarmLabel); // <-- Add this line
-
+    emit alarmDeleted(alarmLabel); 
+    
+    // Refresh the UI with the updated alarm list
     updateAlarmList(alarms, alarmLabels, alarmRepeats, alarmIsSnoozed);
 }
 

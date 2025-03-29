@@ -49,7 +49,7 @@ SetAlarmWindow::SetAlarmWindow(QWidget *parent) : QDialog(parent) {
 
     // Sound Selection Dropdown 
     soundComboBox = new QComboBox(this);
-    // options for sound
+    // Options for sound
     soundComboBox->addItem("Classic");
     soundComboBox->addItem("Beep");
     soundComboBox->addItem("Rooster");

@@ -70,13 +70,16 @@ AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString so
     deleteButton = new QPushButton("Delete Alarm", this);
     closeButton = new QPushButton("Close", this);
 
+    //Create button layout which holds modify, delete and close buttons
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(modifyButton);
     buttonLayout->addWidget(deleteButton);
     buttonLayout->addWidget(closeButton);
 
+    //Include button layout to main layout
     layout->addLayout(buttonLayout);
 
+    //Connect button signals to their slots
     connect(modifyButton, &QPushButton::clicked, this, &AlarmDetails::modifyAlarm);
     connect(deleteButton, &QPushButton::clicked, this, &AlarmDetails::onDeleteClicked);
     connect(closeButton, &QPushButton::clicked, this, &QDialog::close);
@@ -86,7 +89,6 @@ AlarmDetails::AlarmDetails(QTime time, QString repeat, QString label, QString so
 
 /**
  * @brief Handles the modification of the alarm.
- *
  * Emits a signal with the updated alarm details and closes the dialog.
  */
 
@@ -98,7 +100,6 @@ void AlarmDetails::modifyAlarm() {
 
 /**
  * @brief Handles the deletion of the alarm.
- *
  * Emits a signal with the alarm label and closes the dialog.
  */
 

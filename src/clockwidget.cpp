@@ -13,9 +13,7 @@
 
 /**
  * @brief Constructs the ClockWidget.
- *
  * Initializes the clock display, timezone selector, and updates the time periodically.
- *
  * @param parent The parent widget (default is nullptr).
  */
 
