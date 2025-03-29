@@ -1,0 +1,150 @@
+\doxysection{Clock\+Widget Class Reference}
+\hypertarget{class_clock_widget}{}\label{class_clock_widget}\index{ClockWidget@{ClockWidget}}
+
+
+A widget that displays the current time and supports timezone changes.  
+
+
+
+
+{\ttfamily \#include $<$clockwidget.\+h$>$}
+
+Inheritance diagram for Clock\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_clock_widget}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_clock_widget_a7c2e05ac629b9ea8cdadade65917cb9f}{Clock\+Widget}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_clock_widget}{Clock\+Widget} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_clock_widget_a51b3a792883f4176aa877b65546f72fb}{update\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Updates the displayed time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_clock_widget_a5c94d723f3a46a467a67dda1426025ad}{change\+Timezone}} (const QString \&timezone\+Id)
+\begin{DoxyCompactList}\small\item\em Updates the displayed time based on the selected timezone. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QLCDNumber \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_clock_widget_ab04b2ce84e7315ef2d1edd9ea6320b2b}{clock\+Display}}
+\begin{DoxyCompactList}\small\item\em Display for showing the current time. \end{DoxyCompactList}\item 
+QCombo\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_clock_widget_a6a37a786409d240941277e505b7c0a14}{timezone\+Selector}}
+\item 
+QLabel \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_clock_widget_a20d91624cfbcca18630f34f88dd61d23}{timezone\+Label}}
+\begin{DoxyCompactList}\small\item\em Label for displaying timezone information. \end{DoxyCompactList}\item 
+QTime\+Zone \mbox{\hyperlink{class_clock_widget_ad22b0424ed6a9201fbf6496e8d8eb166}{current\+Time\+Zone}}
+\begin{DoxyCompactList}\small\item\em Stores the currently selected timezone. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A widget that displays the current time and supports timezone changes. 
+
+The \doxylink{class_clock_widget}{Clock\+Widget} class provides a real-\/time digital clock with a display. It includes a dropdown menu for selecting different timezones. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_clock_widget_a7c2e05ac629b9ea8cdadade65917cb9f}\index{ClockWidget@{ClockWidget}!ClockWidget@{ClockWidget}}
+\index{ClockWidget@{ClockWidget}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{ClockWidget()}{ClockWidget()}}
+{\footnotesize\ttfamily \label{class_clock_widget_a7c2e05ac629b9ea8cdadade65917cb9f} 
+Clock\+Widget\+::\+Clock\+Widget (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_clock_widget}{Clock\+Widget} instance. 
+
+Constructs the \doxylink{class_clock_widget}{Clock\+Widget}. Initializes the clock display, timezone selector, and updates the time periodically.
+
+Initializes the clock display and timezone selection dropdown.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget (default is nullptr).\\
+\hline
+{\em parent} & The parent widget (default is nullptr). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_clock_widget_a5c94d723f3a46a467a67dda1426025ad}\index{ClockWidget@{ClockWidget}!changeTimezone@{changeTimezone}}
+\index{changeTimezone@{changeTimezone}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{changeTimezone}{changeTimezone}}
+{\footnotesize\ttfamily \label{class_clock_widget_a5c94d723f3a46a467a67dda1426025ad} 
+void Clock\+Widget\+::change\+Timezone (\begin{DoxyParamCaption}\item[{const QString \&}]{timezone\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Updates the displayed time based on the selected timezone. 
+
+Updates the timezone when a new one is selected.
+
+This slot is triggered when the user selects a new timezone from the dropdown.
+
+
+\begin{DoxyParams}{Parameters}
+{\em timezone\+Id} & The ID of the selected timezone.\\
+\hline
+{\em timezone\+Id} & The ID of the new timezone. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_clock_widget_a51b3a792883f4176aa877b65546f72fb}\index{ClockWidget@{ClockWidget}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{updateTime}{updateTime}}
+{\footnotesize\ttfamily \label{class_clock_widget_a51b3a792883f4176aa877b65546f72fb} 
+void Clock\+Widget\+::update\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Updates the displayed time. 
+
+Updates the clock display based on the selected timezone.
+
+This slot is triggered periodically by a timer to refresh the time display. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_clock_widget_ab04b2ce84e7315ef2d1edd9ea6320b2b}\index{ClockWidget@{ClockWidget}!clockDisplay@{clockDisplay}}
+\index{clockDisplay@{clockDisplay}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{clockDisplay}{clockDisplay}}
+{\footnotesize\ttfamily \label{class_clock_widget_ab04b2ce84e7315ef2d1edd9ea6320b2b} 
+QLCDNumber\texorpdfstring{$\ast$}{*} Clock\+Widget\+::clock\+Display\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Display for showing the current time. 
+
+\Hypertarget{class_clock_widget_ad22b0424ed6a9201fbf6496e8d8eb166}\index{ClockWidget@{ClockWidget}!currentTimeZone@{currentTimeZone}}
+\index{currentTimeZone@{currentTimeZone}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{currentTimeZone}{currentTimeZone}}
+{\footnotesize\ttfamily \label{class_clock_widget_ad22b0424ed6a9201fbf6496e8d8eb166} 
+QTime\+Zone Clock\+Widget\+::current\+Time\+Zone\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stores the currently selected timezone. 
+
+\Hypertarget{class_clock_widget_a20d91624cfbcca18630f34f88dd61d23}\index{ClockWidget@{ClockWidget}!timezoneLabel@{timezoneLabel}}
+\index{timezoneLabel@{timezoneLabel}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{timezoneLabel}{timezoneLabel}}
+{\footnotesize\ttfamily \label{class_clock_widget_a20d91624cfbcca18630f34f88dd61d23} 
+QLabel\texorpdfstring{$\ast$}{*} Clock\+Widget\+::timezone\+Label\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Label for displaying timezone information. 
+
+\Hypertarget{class_clock_widget_a6a37a786409d240941277e505b7c0a14}\index{ClockWidget@{ClockWidget}!timezoneSelector@{timezoneSelector}}
+\index{timezoneSelector@{timezoneSelector}!ClockWidget@{ClockWidget}}
+\doxysubsubsection{\texorpdfstring{timezoneSelector}{timezoneSelector}}
+{\footnotesize\ttfamily \label{class_clock_widget_a6a37a786409d240941277e505b7c0a14} 
+QCombo\+Box\texorpdfstring{$\ast$}{*} Clock\+Widget\+::timezone\+Selector\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{clockwidget_8h}{clockwidget.\+h}}\item 
+src/\mbox{\hyperlink{clockwidget_8cpp}{clockwidget.\+cpp}}\end{DoxyCompactItemize}

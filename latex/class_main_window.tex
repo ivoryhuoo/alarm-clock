@@ -1,0 +1,343 @@
+\doxysection{Main\+Window Class Reference}
+\hypertarget{class_main_window}{}\label{class_main_window}\index{MainWindow@{MainWindow}}
+
+
+The main application window for the Rise and Pi alarm clock.  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{Main\+Window}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs the \doxylink{class_main_window}{Main\+Window}. \end{DoxyCompactList}\item 
+QList$<$ QTime $>$ \mbox{\hyperlink{class_main_window_a1721c7dd5c35879d6a9b6017aab36987}{get\+Alarms}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of set alarm times. \end{DoxyCompactList}\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_main_window_ad6acf434b565605568d8873c15b1cba1}{get\+Alarm\+Labels}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of alarm labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_main_window_a0e6e71241efc550ee7046217f830d118}{open\+Set\+Alarm}} ()
+\begin{DoxyCompactList}\small\item\em Opens the Set Alarm window to create a new alarm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aebb4b8ddc68061442078c622a091aa1b}{open\+View\+Alarms}} ()
+\begin{DoxyCompactList}\small\item\em Opens the View Alarms window to display active alarms. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ab825f2c157612bc7c0fd9e5f5845f83e}{handle\+Alarm\+Set}} (QTime time, QString repeat, QString label, QString sound)
+\begin{DoxyCompactList}\small\item\em Handles a newly set alarm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a18f62672cb223d5958c71d5881a8cee1}{check\+Alarms}} ()
+\begin{DoxyCompactList}\small\item\em Checks active alarms and triggers notifications when an alarm matches the current time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aa5806af40d33e4791bc29b747ed52444}{snooze\+Alarm}} (int index, int minutes)
+\begin{DoxyCompactList}\small\item\em Snoozes a triggered alarm for a specified duration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a48f55db9029959276313ef29d28724fb}{play\+Alarm\+Sound}} (const QString \&sound\+Name)
+\begin{DoxyCompactList}\small\item\em Plays the alarm sound based on the provided sound name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a998fa1f085a17572637bfe0bb27d2d54}{stop\+Alarm\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Stops the currently playing alarm sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_a40932e1e016de9c680e9ce3509d4076f}{set\+Alarm\+Button}}
+\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_a55f06db9c963466ae4862e26d42d3236}{view\+Alarms\+Button}}
+\item 
+\mbox{\hyperlink{class_view_alarm}{View\+Alarm}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_a9ee188bc674569b6397bec7381e322c9}{view\+Alarm\+Window}}
+\item 
+\mbox{\hyperlink{class_clock_widget}{Clock\+Widget}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_a4e4a4683560193104624de07f5619deb}{clock\+Widget}}
+\item 
+QList$<$ QTime $>$ \mbox{\hyperlink{class_main_window_a587edb6adec28074bc1d61ad07f19a7f}{alarms}}
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_main_window_a22060e98ad27d1f19694858ee1013972}{alarm\+Labels}}
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_main_window_a7300258b24fb01c06a3baefb8e397010}{alarm\+Repeats}}
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_main_window_ab82130e9bce8baf45fa679593c91fcf1}{alarm\+Sounds}}
+\item 
+QSound \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_a39c055cb51097d11933edfe75b9a4118}{alarm\+Player}} = nullptr
+\item 
+QSet$<$ QString $>$ \mbox{\hyperlink{class_main_window_a120a9d7081931e11b861c4c0c3887bc0}{dismissed\+Today}}
+\item 
+QTimer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_main_window_acf95abd11db31f9962ef3319d1cd5ed2}{alarm\+Check\+Timer}}
+\item 
+QList$<$ bool $>$ \mbox{\hyperlink{class_main_window_a32a9c2a70f92de3dffdc685661a46eba}{alarm\+Is\+Snoozed}}
+\item 
+QVector$<$ QTime $>$ \mbox{\hyperlink{class_main_window_a08a1cb5c38b6b5274d6ac2634d2b3134}{original\+Alarm\+Times}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main application window for the Rise and Pi alarm clock. 
+
+This class manages the alarm clock interface, allowing users to set, view, and manage alarms. It periodically checks for active alarms and triggers notifications when an alarm goes off. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_main_window_a996c5a2b6f77944776856f08ec30858d}\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{MainWindow()}{MainWindow()}}
+{\footnotesize\ttfamily \label{class_main_window_a996c5a2b6f77944776856f08ec30858d} 
+Main\+Window\+::\+Main\+Window (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs the \doxylink{class_main_window}{Main\+Window}. 
+
+Constructs the main application window.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Pointer to the parent QWidget (default\+: nullptr).\\
+\hline
+\end{DoxyParams}
+Initializes the clock display, buttons for setting and viewing alarms, and a timer to check alarms every second.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Pointer to the parent widget. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_main_window_a18f62672cb223d5958c71d5881a8cee1}\index{MainWindow@{MainWindow}!checkAlarms@{checkAlarms}}
+\index{checkAlarms@{checkAlarms}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{checkAlarms}{checkAlarms}}
+{\footnotesize\ttfamily \label{class_main_window_a18f62672cb223d5958c71d5881a8cee1} 
+void Main\+Window\+::check\+Alarms (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Checks active alarms and triggers notifications when an alarm matches the current time. 
+
+Checks if any alarms match the current time and triggers an alert. If an alarm matches the current system time, a message box is displayed with options to snooze or dismiss the alarm. \Hypertarget{class_main_window_ad6acf434b565605568d8873c15b1cba1}\index{MainWindow@{MainWindow}!getAlarmLabels@{getAlarmLabels}}
+\index{getAlarmLabels@{getAlarmLabels}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{getAlarmLabels()}{getAlarmLabels()}}
+{\footnotesize\ttfamily \label{class_main_window_ad6acf434b565605568d8873c15b1cba1} 
+QList$<$ QString $>$ Main\+Window\+::get\+Alarm\+Labels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the list of alarm labels. 
+
+\begin{DoxyReturn}{Returns}
+A QList of QString objects representing the alarm labels. 
+\end{DoxyReturn}
+\Hypertarget{class_main_window_a1721c7dd5c35879d6a9b6017aab36987}\index{MainWindow@{MainWindow}!getAlarms@{getAlarms}}
+\index{getAlarms@{getAlarms}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{getAlarms()}{getAlarms()}}
+{\footnotesize\ttfamily \label{class_main_window_a1721c7dd5c35879d6a9b6017aab36987} 
+QList$<$ QTime $>$ Main\+Window\+::get\+Alarms (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the list of set alarm times. 
+
+\begin{DoxyReturn}{Returns}
+A QList of QTime objects representing the alarm times. 
+\end{DoxyReturn}
+\Hypertarget{class_main_window_ab825f2c157612bc7c0fd9e5f5845f83e}\index{MainWindow@{MainWindow}!handleAlarmSet@{handleAlarmSet}}
+\index{handleAlarmSet@{handleAlarmSet}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{handleAlarmSet}{handleAlarmSet}}
+{\footnotesize\ttfamily \label{class_main_window_ab825f2c157612bc7c0fd9e5f5845f83e} 
+void Main\+Window\+::handle\+Alarm\+Set (\begin{DoxyParamCaption}\item[{QTime}]{time}{, }\item[{QString}]{repeat}{, }\item[{QString}]{label}{, }\item[{QString}]{sound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Handles a newly set alarm. 
+
+Handles the event when an alarm is set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time of the alarm. \\
+\hline
+{\em repeat} & The repeat setting of the alarm. \\
+\hline
+{\em label} & The label for the alarm. \\
+\hline
+{\em sound} & The sound associated with the alarm.\\
+\hline
+\end{DoxyParams}
+Stores the alarm time, label, and updates the alarm list display.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time the alarm is set for. \\
+\hline
+{\em repeat} & The repeat setting of the alarm. \\
+\hline
+{\em label} & A label/name for the alarm. \\
+\hline
+{\em sound} & The sound file associated with the alarm. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_main_window_a0e6e71241efc550ee7046217f830d118}\index{MainWindow@{MainWindow}!openSetAlarm@{openSetAlarm}}
+\index{openSetAlarm@{openSetAlarm}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{openSetAlarm}{openSetAlarm}}
+{\footnotesize\ttfamily \label{class_main_window_a0e6e71241efc550ee7046217f830d118} 
+void Main\+Window\+::open\+Set\+Alarm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Opens the Set Alarm window to create a new alarm. 
+
+Opens the Set Alarm window.
+
+This function creates and displays a dialog window where users can configure a new alarm, including the time, label, repeat settings, and sound. \Hypertarget{class_main_window_aebb4b8ddc68061442078c622a091aa1b}\index{MainWindow@{MainWindow}!openViewAlarms@{openViewAlarms}}
+\index{openViewAlarms@{openViewAlarms}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{openViewAlarms}{openViewAlarms}}
+{\footnotesize\ttfamily \label{class_main_window_aebb4b8ddc68061442078c622a091aa1b} 
+void Main\+Window\+::open\+View\+Alarms (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Opens the View Alarms window to display active alarms. 
+
+Opens the View Alarms window. Displays a list of all active alarms. \Hypertarget{class_main_window_a48f55db9029959276313ef29d28724fb}\index{MainWindow@{MainWindow}!playAlarmSound@{playAlarmSound}}
+\index{playAlarmSound@{playAlarmSound}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{playAlarmSound}{playAlarmSound}}
+{\footnotesize\ttfamily \label{class_main_window_a48f55db9029959276313ef29d28724fb} 
+void Main\+Window\+::play\+Alarm\+Sound (\begin{DoxyParamCaption}\item[{const QString \&}]{sound\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Plays the alarm sound based on the provided sound name. 
+
+This function selects an appropriate sound file based on the given sound name and plays it in an infinite loop. If no sound is specified or an unrecognized sound name is provided, no sound will be played.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound\+Name} & The name of the alarm sound to play. Possible values are\+: "{}\+Classic"{}, "{}\+Beep"{}, and "{}\+Rooster"{}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_main_window_aa5806af40d33e4791bc29b747ed52444}\index{MainWindow@{MainWindow}!snoozeAlarm@{snoozeAlarm}}
+\index{snoozeAlarm@{snoozeAlarm}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{snoozeAlarm}{snoozeAlarm}}
+{\footnotesize\ttfamily \label{class_main_window_aa5806af40d33e4791bc29b747ed52444} 
+void Main\+Window\+::snooze\+Alarm (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{int}]{minutes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Snoozes a triggered alarm for a specified duration. 
+
+Snoozes an alarm for a given number of minutes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the alarm in the list. \\
+\hline
+{\em minutes} & The number of minutes to snooze the alarm.\\
+\hline
+\end{DoxyParams}
+Moves the alarm forward by the specified number of minutes and updates the alarm list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the alarm to snooze. \\
+\hline
+{\em minutes} & The number of minutes to snooze for. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_main_window_a998fa1f085a17572637bfe0bb27d2d54}\index{MainWindow@{MainWindow}!stopAlarmSound@{stopAlarmSound}}
+\index{stopAlarmSound@{stopAlarmSound}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{stopAlarmSound}{stopAlarmSound}}
+{\footnotesize\ttfamily \label{class_main_window_a998fa1f085a17572637bfe0bb27d2d54} 
+void Main\+Window\+::stop\+Alarm\+Sound (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Stops the currently playing alarm sound. 
+
+This function stops the alarm sound, deletes the sound player instance, and sets the player pointer to nullptr to release resources. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_main_window_acf95abd11db31f9962ef3319d1cd5ed2}\index{MainWindow@{MainWindow}!alarmCheckTimer@{alarmCheckTimer}}
+\index{alarmCheckTimer@{alarmCheckTimer}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmCheckTimer}{alarmCheckTimer}}
+{\footnotesize\ttfamily \label{class_main_window_acf95abd11db31f9962ef3319d1cd5ed2} 
+QTimer\texorpdfstring{$\ast$}{*} Main\+Window\+::alarm\+Check\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a32a9c2a70f92de3dffdc685661a46eba}\index{MainWindow@{MainWindow}!alarmIsSnoozed@{alarmIsSnoozed}}
+\index{alarmIsSnoozed@{alarmIsSnoozed}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmIsSnoozed}{alarmIsSnoozed}}
+{\footnotesize\ttfamily \label{class_main_window_a32a9c2a70f92de3dffdc685661a46eba} 
+QList$<$bool$>$ Main\+Window\+::alarm\+Is\+Snoozed\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a22060e98ad27d1f19694858ee1013972}\index{MainWindow@{MainWindow}!alarmLabels@{alarmLabels}}
+\index{alarmLabels@{alarmLabels}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmLabels}{alarmLabels}}
+{\footnotesize\ttfamily \label{class_main_window_a22060e98ad27d1f19694858ee1013972} 
+QList$<$QString$>$ Main\+Window\+::alarm\+Labels\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a39c055cb51097d11933edfe75b9a4118}\index{MainWindow@{MainWindow}!alarmPlayer@{alarmPlayer}}
+\index{alarmPlayer@{alarmPlayer}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmPlayer}{alarmPlayer}}
+{\footnotesize\ttfamily \label{class_main_window_a39c055cb51097d11933edfe75b9a4118} 
+QSound\texorpdfstring{$\ast$}{*} Main\+Window\+::alarm\+Player = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a7300258b24fb01c06a3baefb8e397010}\index{MainWindow@{MainWindow}!alarmRepeats@{alarmRepeats}}
+\index{alarmRepeats@{alarmRepeats}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmRepeats}{alarmRepeats}}
+{\footnotesize\ttfamily \label{class_main_window_a7300258b24fb01c06a3baefb8e397010} 
+QList$<$QString$>$ Main\+Window\+::alarm\+Repeats\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a587edb6adec28074bc1d61ad07f19a7f}\index{MainWindow@{MainWindow}!alarms@{alarms}}
+\index{alarms@{alarms}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarms}{alarms}}
+{\footnotesize\ttfamily \label{class_main_window_a587edb6adec28074bc1d61ad07f19a7f} 
+QList$<$QTime$>$ Main\+Window\+::alarms\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_ab82130e9bce8baf45fa679593c91fcf1}\index{MainWindow@{MainWindow}!alarmSounds@{alarmSounds}}
+\index{alarmSounds@{alarmSounds}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{alarmSounds}{alarmSounds}}
+{\footnotesize\ttfamily \label{class_main_window_ab82130e9bce8baf45fa679593c91fcf1} 
+QList$<$QString$>$ Main\+Window\+::alarm\+Sounds\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a4e4a4683560193104624de07f5619deb}\index{MainWindow@{MainWindow}!clockWidget@{clockWidget}}
+\index{clockWidget@{clockWidget}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{clockWidget}{clockWidget}}
+{\footnotesize\ttfamily \label{class_main_window_a4e4a4683560193104624de07f5619deb} 
+\mbox{\hyperlink{class_clock_widget}{Clock\+Widget}}\texorpdfstring{$\ast$}{*} Main\+Window\+::clock\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a120a9d7081931e11b861c4c0c3887bc0}\index{MainWindow@{MainWindow}!dismissedToday@{dismissedToday}}
+\index{dismissedToday@{dismissedToday}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{dismissedToday}{dismissedToday}}
+{\footnotesize\ttfamily \label{class_main_window_a120a9d7081931e11b861c4c0c3887bc0} 
+QSet$<$QString$>$ Main\+Window\+::dismissed\+Today\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a08a1cb5c38b6b5274d6ac2634d2b3134}\index{MainWindow@{MainWindow}!originalAlarmTimes@{originalAlarmTimes}}
+\index{originalAlarmTimes@{originalAlarmTimes}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{originalAlarmTimes}{originalAlarmTimes}}
+{\footnotesize\ttfamily \label{class_main_window_a08a1cb5c38b6b5274d6ac2634d2b3134} 
+QVector$<$QTime$>$ Main\+Window\+::original\+Alarm\+Times\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a40932e1e016de9c680e9ce3509d4076f}\index{MainWindow@{MainWindow}!setAlarmButton@{setAlarmButton}}
+\index{setAlarmButton@{setAlarmButton}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{setAlarmButton}{setAlarmButton}}
+{\footnotesize\ttfamily \label{class_main_window_a40932e1e016de9c680e9ce3509d4076f} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Main\+Window\+::set\+Alarm\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a55f06db9c963466ae4862e26d42d3236}\index{MainWindow@{MainWindow}!viewAlarmsButton@{viewAlarmsButton}}
+\index{viewAlarmsButton@{viewAlarmsButton}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{viewAlarmsButton}{viewAlarmsButton}}
+{\footnotesize\ttfamily \label{class_main_window_a55f06db9c963466ae4862e26d42d3236} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Main\+Window\+::view\+Alarms\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_main_window_a9ee188bc674569b6397bec7381e322c9}\index{MainWindow@{MainWindow}!viewAlarmWindow@{viewAlarmWindow}}
+\index{viewAlarmWindow@{viewAlarmWindow}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{viewAlarmWindow}{viewAlarmWindow}}
+{\footnotesize\ttfamily \label{class_main_window_a9ee188bc674569b6397bec7381e322c9} 
+\mbox{\hyperlink{class_view_alarm}{View\+Alarm}}\texorpdfstring{$\ast$}{*} Main\+Window\+::view\+Alarm\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{mainwindow_8h}{mainwindow.\+h}}\item 
+src/\mbox{\hyperlink{mainwindow_8cpp}{mainwindow.\+cpp}}\end{DoxyCompactItemize}

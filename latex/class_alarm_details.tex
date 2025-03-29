@@ -1,0 +1,245 @@
+\doxysection{Alarm\+Details Class Reference}
+\hypertarget{class_alarm_details}{}\label{class_alarm_details}\index{AlarmDetails@{AlarmDetails}}
+
+
+Dialog for modifying and deleting alarm details.  
+
+
+
+
+{\ttfamily \#include $<$alarm\+\_\+details.\+h$>$}
+
+Inheritance diagram for Alarm\+Details\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_alarm_details}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_alarm_details_a23272b5e23ae08ecd6edcd24c123f0a0}{alarm\+Modified}} (QTime time, QString repeat, QString label, QString sound)
+\begin{DoxyCompactList}\small\item\em Emitted when an alarm is modified. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_alarm_details_a050a937b6a6cb729c97d88202ac10510}{alarm\+Deleted}} (const QString \&alarm\+Label)
+\begin{DoxyCompactList}\small\item\em Emitted when an alarm is deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_alarm_details_ad02d34203c7b4e90219fb4226782169c}{Alarm\+Details}} (QTime time, QString repeat, QString label, QString sound, QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_alarm_details}{Alarm\+Details} dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_alarm_details_a3b848aef88847844684d4626114496f0}{modify\+Alarm}} ()
+\begin{DoxyCompactList}\small\item\em Handles modifying an alarm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_alarm_details_a033893dc7b1db5b6e3e9cdf5ed53b158}{on\+Delete\+Clicked}} ()
+\begin{DoxyCompactList}\small\item\em Handles deleting an alarm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QTime\+Edit \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a43367ce4f1cc3fd0505f7e54838ad4d2}{time\+Edit}}
+\begin{DoxyCompactList}\small\item\em Widget for selecting the alarm time. \end{DoxyCompactList}\item 
+QCombo\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a540381b6ff9fc7ea3e9413161258b9b5}{repeat\+Combo\+Box}}
+\begin{DoxyCompactList}\small\item\em Dropdown for selecting the repeat frequency. \end{DoxyCompactList}\item 
+QLine\+Edit \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_afb1443761b262e9c534b587f38a7b536}{label\+Edit}}
+\begin{DoxyCompactList}\small\item\em Input field for setting the alarm label. \end{DoxyCompactList}\item 
+QCombo\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a3af02f6a612be8644b688b7cb69b7d91}{sound\+Combo\+Box}}
+\begin{DoxyCompactList}\small\item\em Dropdown for selecting the alarm sound. \end{DoxyCompactList}\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a790f6070d39dd641677532a70f2a8a12}{modify\+Button}}
+\begin{DoxyCompactList}\small\item\em Button for modifying the alarm. \end{DoxyCompactList}\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a3aef0501dc1dd76938afc801ceb4e9e6}{delete\+Button}}
+\begin{DoxyCompactList}\small\item\em Button for deleting the alarm. \end{DoxyCompactList}\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_alarm_details_a1088aca030ca760e439109eaef885963}{close\+Button}}
+\begin{DoxyCompactList}\small\item\em Button for closing the dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Dialog for modifying and deleting alarm details. 
+
+The \doxylink{class_alarm_details}{Alarm\+Details} class allows users to edit alarm settings such as time, repeat frequency, label, and sound. It emits signals when alarms are modified or deleted. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_alarm_details_ad02d34203c7b4e90219fb4226782169c}\index{AlarmDetails@{AlarmDetails}!AlarmDetails@{AlarmDetails}}
+\index{AlarmDetails@{AlarmDetails}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{AlarmDetails()}{AlarmDetails()}}
+{\footnotesize\ttfamily \label{class_alarm_details_ad02d34203c7b4e90219fb4226782169c} 
+Alarm\+Details\+::\+Alarm\+Details (\begin{DoxyParamCaption}\item[{QTime}]{time}{, }\item[{QString}]{repeat}{, }\item[{QString}]{label}{, }\item[{QString}]{sound}{, }\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{class_alarm_details}{Alarm\+Details} dialog. 
+
+Constructs the \doxylink{class_alarm_details}{Alarm\+Details} window.
+
+Initializes the dialog with the given alarm parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The initial time of the alarm. \\
+\hline
+{\em repeat} & The repeat setting of the alarm. \\
+\hline
+{\em label} & The label of the alarm. \\
+\hline
+{\em sound} & The selected alarm sound. \\
+\hline
+{\em parent} & The parent widget (default is nullptr).\\
+\hline
+\end{DoxyParams}
+Initializes the alarm modification interface, allowing users to update or delete an alarm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The alarm\textquotesingle{}s time. \\
+\hline
+{\em repeat} & The alarm\textquotesingle{}s repeat setting. \\
+\hline
+{\em label} & The alarm\textquotesingle{}s label. \\
+\hline
+{\em sound} & The alarm\textquotesingle{}s sound setting. \\
+\hline
+{\em parent} & The parent widget (default is nullptr). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_alarm_details_a050a937b6a6cb729c97d88202ac10510}\index{AlarmDetails@{AlarmDetails}!alarmDeleted@{alarmDeleted}}
+\index{alarmDeleted@{alarmDeleted}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{alarmDeleted}{alarmDeleted}}
+{\footnotesize\ttfamily \label{class_alarm_details_a050a937b6a6cb729c97d88202ac10510} 
+void Alarm\+Details\+::alarm\+Deleted (\begin{DoxyParamCaption}\item[{const QString \&}]{alarm\+Label}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when an alarm is deleted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alarm\+Label} & The label of the deleted alarm. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_alarm_details_a23272b5e23ae08ecd6edcd24c123f0a0}\index{AlarmDetails@{AlarmDetails}!alarmModified@{alarmModified}}
+\index{alarmModified@{alarmModified}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{alarmModified}{alarmModified}}
+{\footnotesize\ttfamily \label{class_alarm_details_a23272b5e23ae08ecd6edcd24c123f0a0} 
+void Alarm\+Details\+::alarm\+Modified (\begin{DoxyParamCaption}\item[{QTime}]{time}{, }\item[{QString}]{repeat}{, }\item[{QString}]{label}{, }\item[{QString}]{sound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when an alarm is modified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The updated time of the alarm. \\
+\hline
+{\em repeat} & The updated repeat setting. \\
+\hline
+{\em label} & The updated alarm label. \\
+\hline
+{\em sound} & The updated alarm sound. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_alarm_details_a3b848aef88847844684d4626114496f0}\index{AlarmDetails@{AlarmDetails}!modifyAlarm@{modifyAlarm}}
+\index{modifyAlarm@{modifyAlarm}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{modifyAlarm}{modifyAlarm}}
+{\footnotesize\ttfamily \label{class_alarm_details_a3b848aef88847844684d4626114496f0} 
+void Alarm\+Details\+::modify\+Alarm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Handles modifying an alarm. 
+
+Handles the modification of the alarm. Emits a signal with the updated alarm details and closes the dialog.
+
+This slot is triggered when the modify button is clicked, updating the alarm details and emitting the alarm\+Modified signal. \Hypertarget{class_alarm_details_a033893dc7b1db5b6e3e9cdf5ed53b158}\index{AlarmDetails@{AlarmDetails}!onDeleteClicked@{onDeleteClicked}}
+\index{onDeleteClicked@{onDeleteClicked}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{onDeleteClicked}{onDeleteClicked}}
+{\footnotesize\ttfamily \label{class_alarm_details_a033893dc7b1db5b6e3e9cdf5ed53b158} 
+void Alarm\+Details\+::on\+Delete\+Clicked (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Handles deleting an alarm. 
+
+Handles the deletion of the alarm. Emits a signal with the alarm label and closes the dialog.
+
+This slot is triggered when the delete button is clicked, emitting the alarm\+Deleted signal. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_alarm_details_a1088aca030ca760e439109eaef885963}\index{AlarmDetails@{AlarmDetails}!closeButton@{closeButton}}
+\index{closeButton@{closeButton}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{closeButton}{closeButton}}
+{\footnotesize\ttfamily \label{class_alarm_details_a1088aca030ca760e439109eaef885963} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Alarm\+Details\+::close\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Button for closing the dialog. 
+
+\Hypertarget{class_alarm_details_a3aef0501dc1dd76938afc801ceb4e9e6}\index{AlarmDetails@{AlarmDetails}!deleteButton@{deleteButton}}
+\index{deleteButton@{deleteButton}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{deleteButton}{deleteButton}}
+{\footnotesize\ttfamily \label{class_alarm_details_a3aef0501dc1dd76938afc801ceb4e9e6} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Alarm\+Details\+::delete\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Button for deleting the alarm. 
+
+\Hypertarget{class_alarm_details_afb1443761b262e9c534b587f38a7b536}\index{AlarmDetails@{AlarmDetails}!labelEdit@{labelEdit}}
+\index{labelEdit@{labelEdit}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{labelEdit}{labelEdit}}
+{\footnotesize\ttfamily \label{class_alarm_details_afb1443761b262e9c534b587f38a7b536} 
+QLine\+Edit\texorpdfstring{$\ast$}{*} Alarm\+Details\+::label\+Edit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Input field for setting the alarm label. 
+
+\Hypertarget{class_alarm_details_a790f6070d39dd641677532a70f2a8a12}\index{AlarmDetails@{AlarmDetails}!modifyButton@{modifyButton}}
+\index{modifyButton@{modifyButton}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{modifyButton}{modifyButton}}
+{\footnotesize\ttfamily \label{class_alarm_details_a790f6070d39dd641677532a70f2a8a12} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Alarm\+Details\+::modify\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Button for modifying the alarm. 
+
+\Hypertarget{class_alarm_details_a540381b6ff9fc7ea3e9413161258b9b5}\index{AlarmDetails@{AlarmDetails}!repeatComboBox@{repeatComboBox}}
+\index{repeatComboBox@{repeatComboBox}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{repeatComboBox}{repeatComboBox}}
+{\footnotesize\ttfamily \label{class_alarm_details_a540381b6ff9fc7ea3e9413161258b9b5} 
+QCombo\+Box\texorpdfstring{$\ast$}{*} Alarm\+Details\+::repeat\+Combo\+Box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Dropdown for selecting the repeat frequency. 
+
+\Hypertarget{class_alarm_details_a3af02f6a612be8644b688b7cb69b7d91}\index{AlarmDetails@{AlarmDetails}!soundComboBox@{soundComboBox}}
+\index{soundComboBox@{soundComboBox}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{soundComboBox}{soundComboBox}}
+{\footnotesize\ttfamily \label{class_alarm_details_a3af02f6a612be8644b688b7cb69b7d91} 
+QCombo\+Box\texorpdfstring{$\ast$}{*} Alarm\+Details\+::sound\+Combo\+Box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Dropdown for selecting the alarm sound. 
+
+\Hypertarget{class_alarm_details_a43367ce4f1cc3fd0505f7e54838ad4d2}\index{AlarmDetails@{AlarmDetails}!timeEdit@{timeEdit}}
+\index{timeEdit@{timeEdit}!AlarmDetails@{AlarmDetails}}
+\doxysubsubsection{\texorpdfstring{timeEdit}{timeEdit}}
+{\footnotesize\ttfamily \label{class_alarm_details_a43367ce4f1cc3fd0505f7e54838ad4d2} 
+QTime\+Edit\texorpdfstring{$\ast$}{*} Alarm\+Details\+::time\+Edit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Widget for selecting the alarm time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{alarm__details_8h}{alarm\+\_\+details.\+h}}\item 
+src/\mbox{\hyperlink{alarm__details_8cpp}{alarm\+\_\+details.\+cpp}}\end{DoxyCompactItemize}

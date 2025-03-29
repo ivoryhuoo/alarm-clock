@@ -1,0 +1,52 @@
+\doxysection{alarm\+\_\+details.\+h}
+\hypertarget{alarm__details_8h_source}{}\label{alarm__details_8h_source}\index{include/alarm\_details.h@{include/alarm\_details.h}}
+\mbox{\hyperlink{alarm__details_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ ALARMDETAILS\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ ALARMDETAILS\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QTimeEdit>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QLineEdit>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QComboBox>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_alarm_details_ad02d34203c7b4e90219fb4226782169c}{AlarmDetails}}\ :\ \textcolor{keyword}{public}\ QDialog\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_alarm_details_ad02d34203c7b4e90219fb4226782169c}{AlarmDetails}}(QTime\ time,\ QString\ repeat,\ QString\ label,\ QString\ sound,\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ signals:}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_alarm_details_a23272b5e23ae08ecd6edcd24c123f0a0}{alarmModified}}(QTime\ time,\ QString\ repeat,\ QString\ label,\ QString\ sound);\ }
+\DoxyCodeLine{00060\ \ \ \ \ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_alarm_details_a050a937b6a6cb729c97d88202ac10510}{alarmDeleted}}(\textcolor{keyword}{const}\ QString\ \&alarmLabel);\ }
+\DoxyCodeLine{00067\ \ \ \ \ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_alarm_details_a3b848aef88847844684d4626114496f0}{modifyAlarm}}();\ \ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_alarm_details_a033893dc7b1db5b6e3e9cdf5ed53b158}{onDeleteClicked}}();\ \textcolor{comment}{//\ Handles\ deleting\ an\ alarm}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00088\ \ \ \ \ QTimeEdit\ *\mbox{\hyperlink{class_alarm_details_a43367ce4f1cc3fd0505f7e54838ad4d2}{timeEdit}};\ }
+\DoxyCodeLine{00089\ \ \ \ \ QComboBox\ *\mbox{\hyperlink{class_alarm_details_a540381b6ff9fc7ea3e9413161258b9b5}{repeatComboBox}};\ }
+\DoxyCodeLine{00090\ \ \ \ \ QLineEdit\ *\mbox{\hyperlink{class_alarm_details_afb1443761b262e9c534b587f38a7b536}{labelEdit}};\ }
+\DoxyCodeLine{00091\ \ \ \ \ QComboBox\ *\mbox{\hyperlink{class_alarm_details_a3af02f6a612be8644b688b7cb69b7d91}{soundComboBox}};\ }
+\DoxyCodeLine{00092\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_alarm_details_a790f6070d39dd641677532a70f2a8a12}{modifyButton}};\ \ }
+\DoxyCodeLine{00093\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_alarm_details_a3aef0501dc1dd76938afc801ceb4e9e6}{deleteButton}};\ \ }
+\DoxyCodeLine{00094\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_alarm_details_a1088aca030ca760e439109eaef885963}{closeButton}};\ }
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ALARMDETAILS\_H}}
+
+\end{DoxyCode}

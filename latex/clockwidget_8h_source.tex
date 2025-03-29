@@ -1,0 +1,45 @@
+\doxysection{clockwidget.\+h}
+\hypertarget{clockwidget_8h_source}{}\label{clockwidget_8h_source}\index{include/clockwidget.h@{include/clockwidget.h}}
+\mbox{\hyperlink{clockwidget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ CLOCKWIDGET\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ CLOCKWIDGET\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QLCDNumber>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QTime>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QTimeZone>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QComboBox>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_clock_widget_a7c2e05ac629b9ea8cdadade65917cb9f}{ClockWidget}}\ :\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_clock_widget_a7c2e05ac629b9ea8cdadade65917cb9f}{ClockWidget}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_clock_widget_a51b3a792883f4176aa877b65546f72fb}{updateTime}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_clock_widget_a5c94d723f3a46a467a67dda1426025ad}{changeTimezone}}(\textcolor{keyword}{const}\ QString\ \&timezoneId);\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \ \ QLCDNumber\ *\mbox{\hyperlink{class_clock_widget_ab04b2ce84e7315ef2d1edd9ea6320b2b}{clockDisplay}};\ }
+\DoxyCodeLine{00069\ \ \ \ \ QComboBox\ *\mbox{\hyperlink{class_clock_widget_a6a37a786409d240941277e505b7c0a14}{timezoneSelector}};\ \textcolor{comment}{//\ Dropdown\ for\ timezone\ selection}}
+\DoxyCodeLine{00070\ \ \ \ \ QLabel\ *\mbox{\hyperlink{class_clock_widget_a20d91624cfbcca18630f34f88dd61d23}{timezoneLabel}};\ }
+\DoxyCodeLine{00071\ \ \ \ \ QTimeZone\ \mbox{\hyperlink{class_clock_widget_ad22b0424ed6a9201fbf6496e8d8eb166}{currentTimeZone}};\ }
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CLOCKWIDGET\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,184 @@
+\doxysection{Set\+Alarm\+Window Class Reference}
+\hypertarget{class_set_alarm_window}{}\label{class_set_alarm_window}\index{SetAlarmWindow@{SetAlarmWindow}}
+
+
+The \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} class provides a dialog for setting an alarm.  
+
+
+
+
+{\ttfamily \#include $<$setalarmwindow.\+h$>$}
+
+Inheritance diagram for Set\+Alarm\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_set_alarm_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_set_alarm_window_a71162b5d789bbb1505fa6122d8db3353}{alarm\+Set}} (QTime time, QString repeat, QString label, QString sound)
+\begin{DoxyCompactList}\small\item\em Signal emitted when an alarm is set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_set_alarm_window_a4f6df961fdbcde25462658f0d968c9d7}{Set\+Alarm\+Window}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_set_alarm_window_aeddbecf3bde267c11f756452787e4261}{save\+Alarm}} ()
+\begin{DoxyCompactList}\small\item\em Slot to handle saving the alarm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QTime\+Edit \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_aedffed733708d28112c370ca1ed455ff}{time\+Edit}}
+\begin{DoxyCompactList}\small\item\em Time selection widget. \end{DoxyCompactList}\item 
+QCombo\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_a7c5373158f084a50ea051fdd15f02f72}{repeat\+Combo\+Box}}
+\begin{DoxyCompactList}\small\item\em Repeat option selection widget. \end{DoxyCompactList}\item 
+QLine\+Edit \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_a2e00a74c64998b9300b0464b25624066}{label\+Edit}}
+\begin{DoxyCompactList}\small\item\em Alarm label input widget. \end{DoxyCompactList}\item 
+QCombo\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_a06fec663be2cc5342459a0f31c5776cd}{sound\+Combo\+Box}}
+\begin{DoxyCompactList}\small\item\em Sound selection widget. \end{DoxyCompactList}\item 
+QPush\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_a52a67449aad57d9d8652f327819c4c54}{save\+Button}}
+\begin{DoxyCompactList}\small\item\em Button to save the alarm. \end{DoxyCompactList}\item 
+QLabel \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_alarm_window_a9431368df2fcf8dfca1fa1a1eae276ca}{error\+Label}}
+\begin{DoxyCompactList}\small\item\em Label to display error messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} class provides a dialog for setting an alarm. 
+
+The \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} class allows users to set an alarm by selecting a time, a repeat option, a label, and a sound. The alarm settings are saved when the user clicks the save button. A signal is emitted to the main window with the alarm details, which include the time, repeat option, label, and sound. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_set_alarm_window_a4f6df961fdbcde25462658f0d968c9d7}\index{SetAlarmWindow@{SetAlarmWindow}!SetAlarmWindow@{SetAlarmWindow}}
+\index{SetAlarmWindow@{SetAlarmWindow}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{SetAlarmWindow()}{SetAlarmWindow()}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a4f6df961fdbcde25462658f0d968c9d7} 
+Set\+Alarm\+Window\+::\+Set\+Alarm\+Window (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} dialog. 
+
+Constructs the \doxylink{class_set_alarm_window}{Set\+Alarm\+Window} dialog and initializes its components.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget, default is nullptr.\\
+\hline
+\end{DoxyParams}
+This constructor sets up the dialog\textquotesingle{}s layout and widgets, including the time selection, repeat options, label input, sound selection, and save button. It also connects the save button to the {\ttfamily save\+Alarm} slot for handling the alarm saving functionality.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget, default is nullptr. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_set_alarm_window_a71162b5d789bbb1505fa6122d8db3353}\index{SetAlarmWindow@{SetAlarmWindow}!alarmSet@{alarmSet}}
+\index{alarmSet@{alarmSet}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{alarmSet}{alarmSet}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a71162b5d789bbb1505fa6122d8db3353} 
+void Set\+Alarm\+Window\+::alarm\+Set (\begin{DoxyParamCaption}\item[{QTime}]{time}{, }\item[{QString}]{repeat}{, }\item[{QString}]{label}{, }\item[{QString}]{sound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal emitted when an alarm is set. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The selected time for the alarm. \\
+\hline
+{\em repeat} & The repeat option for the alarm. \\
+\hline
+{\em label} & The label for the alarm. \\
+\hline
+{\em sound} & The selected sound for the alarm. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_set_alarm_window_aeddbecf3bde267c11f756452787e4261}\index{SetAlarmWindow@{SetAlarmWindow}!saveAlarm@{saveAlarm}}
+\index{saveAlarm@{saveAlarm}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{saveAlarm}{saveAlarm}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_aeddbecf3bde267c11f756452787e4261} 
+void Set\+Alarm\+Window\+::save\+Alarm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Slot to handle saving the alarm. 
+
+Handles the saving of the alarm settings.
+
+This function validates the selected time and label, then emits the {\ttfamily alarm\+Set} signal with the selected time, repeat option, label, and sound. If the time or label is invalid, an error message is displayed. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_set_alarm_window_a9431368df2fcf8dfca1fa1a1eae276ca}\index{SetAlarmWindow@{SetAlarmWindow}!errorLabel@{errorLabel}}
+\index{errorLabel@{errorLabel}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{errorLabel}{errorLabel}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a9431368df2fcf8dfca1fa1a1eae276ca} 
+QLabel\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::error\+Label\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Label to display error messages. 
+
+\Hypertarget{class_set_alarm_window_a2e00a74c64998b9300b0464b25624066}\index{SetAlarmWindow@{SetAlarmWindow}!labelEdit@{labelEdit}}
+\index{labelEdit@{labelEdit}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{labelEdit}{labelEdit}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a2e00a74c64998b9300b0464b25624066} 
+QLine\+Edit\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::label\+Edit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Alarm label input widget. 
+
+\Hypertarget{class_set_alarm_window_a7c5373158f084a50ea051fdd15f02f72}\index{SetAlarmWindow@{SetAlarmWindow}!repeatComboBox@{repeatComboBox}}
+\index{repeatComboBox@{repeatComboBox}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{repeatComboBox}{repeatComboBox}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a7c5373158f084a50ea051fdd15f02f72} 
+QCombo\+Box\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::repeat\+Combo\+Box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Repeat option selection widget. 
+
+\Hypertarget{class_set_alarm_window_a52a67449aad57d9d8652f327819c4c54}\index{SetAlarmWindow@{SetAlarmWindow}!saveButton@{saveButton}}
+\index{saveButton@{saveButton}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{saveButton}{saveButton}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a52a67449aad57d9d8652f327819c4c54} 
+QPush\+Button\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::save\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Button to save the alarm. 
+
+\Hypertarget{class_set_alarm_window_a06fec663be2cc5342459a0f31c5776cd}\index{SetAlarmWindow@{SetAlarmWindow}!soundComboBox@{soundComboBox}}
+\index{soundComboBox@{soundComboBox}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{soundComboBox}{soundComboBox}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_a06fec663be2cc5342459a0f31c5776cd} 
+QCombo\+Box\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::sound\+Combo\+Box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sound selection widget. 
+
+\Hypertarget{class_set_alarm_window_aedffed733708d28112c370ca1ed455ff}\index{SetAlarmWindow@{SetAlarmWindow}!timeEdit@{timeEdit}}
+\index{timeEdit@{timeEdit}!SetAlarmWindow@{SetAlarmWindow}}
+\doxysubsubsection{\texorpdfstring{timeEdit}{timeEdit}}
+{\footnotesize\ttfamily \label{class_set_alarm_window_aedffed733708d28112c370ca1ed455ff} 
+QTime\+Edit\texorpdfstring{$\ast$}{*} Set\+Alarm\+Window\+::time\+Edit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Time selection widget. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{setalarmwindow_8h}{setalarmwindow.\+h}}\item 
+src/\mbox{\hyperlink{setalarmwindow_8cpp}{setalarmwindow.\+cpp}}\end{DoxyCompactItemize}

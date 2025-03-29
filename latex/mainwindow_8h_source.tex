@@ -1,0 +1,63 @@
+\doxysection{mainwindow.\+h}
+\hypertarget{mainwindow_8h_source}{}\label{mainwindow_8h_source}\index{include/mainwindow.h@{include/mainwindow.h}}
+\mbox{\hyperlink{mainwindow_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ MAINWINDOW\_H}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ MAINWINDOW\_H}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QTime>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QTimer>}\ \ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <QSet>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <QSound>}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{clockwidget_8h}{clockwidget.h}}"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{setalarmwindow_8h}{setalarmwindow.h}}"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{view_alarm_8h}{viewAlarm.h}}"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}\ :\ \textcolor{keyword}{public}\ QMainWindow\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ QList<QTime>\ \mbox{\hyperlink{class_main_window_a1721c7dd5c35879d6a9b6017aab36987}{getAlarms}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_main_window_ad6acf434b565605568d8873c15b1cba1}{getAlarmLabels}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_a0e6e71241efc550ee7046217f830d118}{openSetAlarm}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_aebb4b8ddc68061442078c622a091aa1b}{openViewAlarms}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_ab825f2c157612bc7c0fd9e5f5845f83e}{handleAlarmSet}}(QTime\ time,\ QString\ repeat,\ QString\ label,\ QString\ sound);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_a18f62672cb223d5958c71d5881a8cee1}{checkAlarms}}();\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_aa5806af40d33e4791bc29b747ed52444}{snoozeAlarm}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ minutes);}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_a48f55db9029959276313ef29d28724fb}{playAlarmSound}}(\textcolor{keyword}{const}\ QString\ \&soundName);\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_a998fa1f085a17572637bfe0bb27d2d54}{stopAlarmSound}}();\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00098\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_main_window_a40932e1e016de9c680e9ce3509d4076f}{setAlarmButton}};\ \ \textcolor{comment}{//<\ Button\ to\ open\ the\ Set\ Alarm\ window\ }}
+\DoxyCodeLine{00099\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_main_window_a55f06db9c963466ae4862e26d42d3236}{viewAlarmsButton}};\ \textcolor{comment}{//<\ Button\ to\ open\ the\ View\ Alarms\ window\ }}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_view_alarm}{ViewAlarm}}\ *\mbox{\hyperlink{class_main_window_a9ee188bc674569b6397bec7381e322c9}{viewAlarmWindow}};\ \textcolor{comment}{//<\ Pointer\ to\ the\ View\ Alarm\ window\ }}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{class_clock_widget}{ClockWidget}}\ *\mbox{\hyperlink{class_main_window_a4e4a4683560193104624de07f5619deb}{clockWidget}};\ \textcolor{comment}{//<\ Widget\ displaying\ the\ current\ time\ }}
+\DoxyCodeLine{00102\ \ \ \ \ QList<QTime>\ \mbox{\hyperlink{class_main_window_a587edb6adec28074bc1d61ad07f19a7f}{alarms}};\ \textcolor{comment}{//<\ List\ of\ active\ alarm\ times\ }}
+\DoxyCodeLine{00103\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_main_window_a22060e98ad27d1f19694858ee1013972}{alarmLabels}};\ \textcolor{comment}{//<\ List\ of\ labels\ associated\ with\ alarms\ }}
+\DoxyCodeLine{00104\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_main_window_a7300258b24fb01c06a3baefb8e397010}{alarmRepeats}};\ \textcolor{comment}{//<Stores\ repeat\ setting}}
+\DoxyCodeLine{00105\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_main_window_ab82130e9bce8baf45fa679593c91fcf1}{alarmSounds}};\ \textcolor{comment}{//<\ Stores\ sound\ choices\ for\ alarms}}
+\DoxyCodeLine{00106\ \ \ \ \ QSound\ *\mbox{\hyperlink{class_main_window_a39c055cb51097d11933edfe75b9a4118}{alarmPlayer}}\ =\ \textcolor{keyword}{nullptr};\ \textcolor{comment}{//<\ Pointer\ to\ the\ QSound\ object\ that\ plays\ the\ alarm\ sound}}
+\DoxyCodeLine{00107\ \ \ \ \ QSet<QString>\ \mbox{\hyperlink{class_main_window_a120a9d7081931e11b861c4c0c3887bc0}{dismissedToday}};\ \textcolor{comment}{//<Track\ dismissed\ alarms\ (by\ label\ +\ date)}}
+\DoxyCodeLine{00108\ \ \ \ \ QTimer\ *\mbox{\hyperlink{class_main_window_acf95abd11db31f9962ef3319d1cd5ed2}{alarmCheckTimer}};\ \textcolor{comment}{//<\ Timer\ that\ checks\ alarms\ every\ second\ }}
+\DoxyCodeLine{00109\ \ \ \ \ QList<bool>\ \mbox{\hyperlink{class_main_window_a32a9c2a70f92de3dffdc685661a46eba}{alarmIsSnoozed}};\ \textcolor{comment}{//<\ Boolean\ for\ snoozing\ an\ alarm}}
+\DoxyCodeLine{00110\ \ \ \ \ QVector<QTime>\ \mbox{\hyperlink{class_main_window_a08a1cb5c38b6b5274d6ac2634d2b3134}{originalAlarmTimes}};\ \textcolor{comment}{//<\ Keep\ track\ of\ original\ alarm\ time\ set\ }}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINWINDOW\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,54 @@
+\doxysection{view\+Alarm.\+h}
+\hypertarget{view_alarm_8h_source}{}\label{view_alarm_8h_source}\index{include/viewAlarm.h@{include/viewAlarm.h}}
+\mbox{\hyperlink{view_alarm_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ VIEWALARM\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ VIEWALARM\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QFrame>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QTime>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QScrollArea>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QFile>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QTextStream>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_view_alarm_ac4d1c273d6baae0dd2285c32d7622210}{ViewAlarm}}\ :\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_view_alarm_ac4d1c273d6baae0dd2285c32d7622210}{ViewAlarm}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_alarm_a00c065e152a020cd80e935394f1a85ba}{updateAlarmList}}(\textcolor{keyword}{const}\ QList<QTime>\ \&\mbox{\hyperlink{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58}{alarms}},\ \textcolor{keyword}{const}\ QList<QString>\ \&labels,\ \textcolor{keyword}{const}\ QList<QString>\ \&repeats,\ \textcolor{keyword}{const}\ QList<bool>\ \&isSnoozed);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \ QVBoxLayout\ *\mbox{\hyperlink{class_view_alarm_a233e0bade0d6b80816b6dd45a7c0baf3}{alarmsLayout}};\ }
+\DoxyCodeLine{00060\ \ \ \ \ QMap<QPushButton*,\ QString>\ \mbox{\hyperlink{class_view_alarm_a8a0c9a86bc579d4b04a730aeaab97e77}{alarmButtons}};\ }
+\DoxyCodeLine{00061\ \ \ \ \ QList<QTime>\ \mbox{\hyperlink{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58}{alarms}};\ }
+\DoxyCodeLine{00062\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_view_alarm_a972c1004f5ec728f51f60916eef487f1}{alarmLabels}};\ }
+\DoxyCodeLine{00063\ \ \ \ \ QList<QString>\ \mbox{\hyperlink{class_view_alarm_a2e598e62f58ad1ccd30f0933aa85adbc}{alarmRepeats}};\ }
+\DoxyCodeLine{00064\ \ \ \ \ QList<bool>\ \mbox{\hyperlink{class_view_alarm_ad5afb1a744e1e3d1c0764671e4aa8ba5}{alarmIsSnoozed}};\ \ \textcolor{comment}{//\ Add\ this\ to\ the\ private\ section}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ signals:}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_alarm_a944a4933ae098592d2f02d0c005455db}{alarmModified}}(\textcolor{keywordtype}{int}\ index,\ QTime\ newTime,\ QString\ newRepeat,\ QString\ newLabel,\ QString\ newSound);}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_alarm_a1ea9e3f12ad9f619f45cde051b1d681c}{alarmDeleted}}(\textcolor{keyword}{const}\ QString\ \&label);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_alarm_ae5c14137be585a79f79b61ecb6f8eb86}{handleAlarmClick}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_alarm_aa6bbe28dee347c1c64c04eb0417872c8}{removeAlarm}}(\textcolor{keyword}{const}\ QString\ \&alarmLabel);}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VIEWALARM\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,207 @@
+\doxysection{View\+Alarm Class Reference}
+\hypertarget{class_view_alarm}{}\label{class_view_alarm}\index{ViewAlarm@{ViewAlarm}}
+
+
+A widget for displaying and managing active alarms.  
+
+
+
+
+{\ttfamily \#include $<$view\+Alarm.\+h$>$}
+
+Inheritance diagram for View\+Alarm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_view_alarm}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_view_alarm_a944a4933ae098592d2f02d0c005455db}{alarm\+Modified}} (int index, QTime new\+Time, QString new\+Repeat, QString new\+Label, QString new\+Sound)
+\item 
+void \mbox{\hyperlink{class_view_alarm_a1ea9e3f12ad9f619f45cde051b1d681c}{alarm\+Deleted}} (const QString \&label)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_view_alarm_ac4d1c273d6baae0dd2285c32d7622210}{View\+Alarm}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_view_alarm}{View\+Alarm} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_view_alarm_a00c065e152a020cd80e935394f1a85ba}{update\+Alarm\+List}} (const QList$<$ QTime $>$ \&\mbox{\hyperlink{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58}{alarms}}, const QList$<$ QString $>$ \&labels, const QList$<$ QString $>$ \&repeats, const QList$<$ bool $>$ \&is\+Snoozed)
+\begin{DoxyCompactList}\small\item\em Updates the list of alarms displayed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_view_alarm_ae5c14137be585a79f79b61ecb6f8eb86}{handle\+Alarm\+Click}} ()
+\begin{DoxyCompactList}\small\item\em Handles user interactions with an alarm button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_view_alarm_aa6bbe28dee347c1c64c04eb0417872c8}{remove\+Alarm}} (const QString \&alarm\+Label)
+\begin{DoxyCompactList}\small\item\em Removes an alarm from the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QVBox\+Layout \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_view_alarm_a233e0bade0d6b80816b6dd45a7c0baf3}{alarms\+Layout}}
+\item 
+QMap$<$ QPush\+Button \texorpdfstring{$\ast$}{*}, QString $>$ \mbox{\hyperlink{class_view_alarm_a8a0c9a86bc579d4b04a730aeaab97e77}{alarm\+Buttons}}
+\item 
+QList$<$ QTime $>$ \mbox{\hyperlink{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58}{alarms}}
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_view_alarm_a972c1004f5ec728f51f60916eef487f1}{alarm\+Labels}}
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_view_alarm_a2e598e62f58ad1ccd30f0933aa85adbc}{alarm\+Repeats}}
+\item 
+QList$<$ bool $>$ \mbox{\hyperlink{class_view_alarm_ad5afb1a744e1e3d1c0764671e4aa8ba5}{alarm\+Is\+Snoozed}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A widget for displaying and managing active alarms. 
+
+The \doxylink{class_view_alarm}{View\+Alarm} class provides a user interface for listing active alarms as buttons. Users can interact with these alarms through the GUI. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_view_alarm_ac4d1c273d6baae0dd2285c32d7622210}\index{ViewAlarm@{ViewAlarm}!ViewAlarm@{ViewAlarm}}
+\index{ViewAlarm@{ViewAlarm}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{ViewAlarm()}{ViewAlarm()}}
+{\footnotesize\ttfamily \label{class_view_alarm_ac4d1c273d6baae0dd2285c32d7622210} 
+View\+Alarm\+::\+View\+Alarm (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_view_alarm}{View\+Alarm} instance. 
+
+Constructs a \doxylink{class_view_alarm}{View\+Alarm} window. Initializes the window with a scrollable list of alarms and a close button.
+
+Initializes the alarm display layout and related UI components.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget (default is nullptr).\\
+\hline
+{\em parent} & The parent widget (default is nullptr). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_view_alarm_a1ea9e3f12ad9f619f45cde051b1d681c}\index{ViewAlarm@{ViewAlarm}!alarmDeleted@{alarmDeleted}}
+\index{alarmDeleted@{alarmDeleted}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmDeleted}{alarmDeleted}}
+{\footnotesize\ttfamily \label{class_view_alarm_a1ea9e3f12ad9f619f45cde051b1d681c} 
+void View\+Alarm\+::alarm\+Deleted (\begin{DoxyParamCaption}\item[{const QString \&}]{label}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{class_view_alarm_a944a4933ae098592d2f02d0c005455db}\index{ViewAlarm@{ViewAlarm}!alarmModified@{alarmModified}}
+\index{alarmModified@{alarmModified}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmModified}{alarmModified}}
+{\footnotesize\ttfamily \label{class_view_alarm_a944a4933ae098592d2f02d0c005455db} 
+void View\+Alarm\+::alarm\+Modified (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{QTime}]{new\+Time}{, }\item[{QString}]{new\+Repeat}{, }\item[{QString}]{new\+Label}{, }\item[{QString}]{new\+Sound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{class_view_alarm_ae5c14137be585a79f79b61ecb6f8eb86}\index{ViewAlarm@{ViewAlarm}!handleAlarmClick@{handleAlarmClick}}
+\index{handleAlarmClick@{handleAlarmClick}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{handleAlarmClick}{handleAlarmClick}}
+{\footnotesize\ttfamily \label{class_view_alarm_ae5c14137be585a79f79b61ecb6f8eb86} 
+void View\+Alarm\+::handle\+Alarm\+Click (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Handles user interactions with an alarm button. 
+
+Handles alarm button clicks by opening a new window with alarm details.
+
+This slot is triggered when an alarm button is clicked.
+
+This method retrieves the clicked alarm\textquotesingle{}s details and opens an \doxylink{class_alarm_details}{Alarm\+Details} dialog, allowing the user to modify or delete the alarm. \Hypertarget{class_view_alarm_aa6bbe28dee347c1c64c04eb0417872c8}\index{ViewAlarm@{ViewAlarm}!removeAlarm@{removeAlarm}}
+\index{removeAlarm@{removeAlarm}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{removeAlarm}{removeAlarm}}
+{\footnotesize\ttfamily \label{class_view_alarm_aa6bbe28dee347c1c64c04eb0417872c8} 
+void View\+Alarm\+::remove\+Alarm (\begin{DoxyParamCaption}\item[{const QString \&}]{alarm\+Label}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Removes an alarm from the list. 
+
+Removes an alarm from the UI and the stored list. This method deletes the alarm from both the UI and the internal alarm list when the user chooses to remove an alarm.
+
+This function removes an alarm entry based on the provided label.
+
+
+\begin{DoxyParams}{Parameters}
+{\em alarm\+Label} & The label of the alarm to be removed.\\
+\hline
+{\em alarm\+Label} & The label of the alarm to be removed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_view_alarm_a00c065e152a020cd80e935394f1a85ba}\index{ViewAlarm@{ViewAlarm}!updateAlarmList@{updateAlarmList}}
+\index{updateAlarmList@{updateAlarmList}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{updateAlarmList()}{updateAlarmList()}}
+{\footnotesize\ttfamily \label{class_view_alarm_a00c065e152a020cd80e935394f1a85ba} 
+void View\+Alarm\+::update\+Alarm\+List (\begin{DoxyParamCaption}\item[{const QList$<$ QTime $>$ \&}]{new\+Alarms}{, }\item[{const QList$<$ QString $>$ \&}]{new\+Labels}{, }\item[{const QList$<$ QString $>$ \&}]{new\+Repeats}{, }\item[{const QList$<$ bool $>$ \&}]{is\+Snoozed}{}\end{DoxyParamCaption})}
+
+
+
+Updates the list of alarms displayed. 
+
+Updates the displayed alarm list, replacing each alarm with a button.
+
+This function refreshes the UI to show updated alarm times and labels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em alarms} & List of alarm times. \\
+\hline
+{\em labels} & List of alarm labels.\\
+\hline
+\end{DoxyParams}
+This method clears the existing alarm buttons and repopulates the list based on the provided new\+Alarms and new\+Labels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Alarms} & A list of QTime objects representing the alarm times. \\
+\hline
+{\em new\+Labels} & A list of QString objects representing the alarm labels. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_view_alarm_a8a0c9a86bc579d4b04a730aeaab97e77}\index{ViewAlarm@{ViewAlarm}!alarmButtons@{alarmButtons}}
+\index{alarmButtons@{alarmButtons}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmButtons}{alarmButtons}}
+{\footnotesize\ttfamily \label{class_view_alarm_a8a0c9a86bc579d4b04a730aeaab97e77} 
+QMap$<$QPush\+Button\texorpdfstring{$\ast$}{*}, QString$>$ View\+Alarm\+::alarm\+Buttons\hspace{0.3cm}{\ttfamily [private]}}
+
+Map buttons to labels \Hypertarget{class_view_alarm_ad5afb1a744e1e3d1c0764671e4aa8ba5}\index{ViewAlarm@{ViewAlarm}!alarmIsSnoozed@{alarmIsSnoozed}}
+\index{alarmIsSnoozed@{alarmIsSnoozed}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmIsSnoozed}{alarmIsSnoozed}}
+{\footnotesize\ttfamily \label{class_view_alarm_ad5afb1a744e1e3d1c0764671e4aa8ba5} 
+QList$<$bool$>$ View\+Alarm\+::alarm\+Is\+Snoozed\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_view_alarm_a972c1004f5ec728f51f60916eef487f1}\index{ViewAlarm@{ViewAlarm}!alarmLabels@{alarmLabels}}
+\index{alarmLabels@{alarmLabels}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmLabels}{alarmLabels}}
+{\footnotesize\ttfamily \label{class_view_alarm_a972c1004f5ec728f51f60916eef487f1} 
+QList$<$QString$>$ View\+Alarm\+::alarm\+Labels\hspace{0.3cm}{\ttfamily [private]}}
+
+Stores alarm labels \Hypertarget{class_view_alarm_a2e598e62f58ad1ccd30f0933aa85adbc}\index{ViewAlarm@{ViewAlarm}!alarmRepeats@{alarmRepeats}}
+\index{alarmRepeats@{alarmRepeats}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmRepeats}{alarmRepeats}}
+{\footnotesize\ttfamily \label{class_view_alarm_a2e598e62f58ad1ccd30f0933aa85adbc} 
+QList$<$QString$>$ View\+Alarm\+::alarm\+Repeats\hspace{0.3cm}{\ttfamily [private]}}
+
+Stores alarm repeat settings \Hypertarget{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58}\index{ViewAlarm@{ViewAlarm}!alarms@{alarms}}
+\index{alarms@{alarms}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarms}{alarms}}
+{\footnotesize\ttfamily \label{class_view_alarm_afd43c1791e936b9955b9f63bfc44fe58} 
+QList$<$QTime$>$ View\+Alarm\+::alarms\hspace{0.3cm}{\ttfamily [private]}}
+
+Stores alarm times \Hypertarget{class_view_alarm_a233e0bade0d6b80816b6dd45a7c0baf3}\index{ViewAlarm@{ViewAlarm}!alarmsLayout@{alarmsLayout}}
+\index{alarmsLayout@{alarmsLayout}!ViewAlarm@{ViewAlarm}}
+\doxysubsubsection{\texorpdfstring{alarmsLayout}{alarmsLayout}}
+{\footnotesize\ttfamily \label{class_view_alarm_a233e0bade0d6b80816b6dd45a7c0baf3} 
+QVBox\+Layout\texorpdfstring{$\ast$}{*} View\+Alarm\+::alarms\+Layout\hspace{0.3cm}{\ttfamily [private]}}
+
+Layout to hold alarm buttons 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{view_alarm_8h}{view\+Alarm.\+h}}\item 
+src/\mbox{\hyperlink{view_alarm_8cpp}{view\+Alarm.\+cpp}}\end{DoxyCompactItemize}

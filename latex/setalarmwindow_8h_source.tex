@@ -1,0 +1,42 @@
+\doxysection{setalarmwindow.\+h}
+\hypertarget{setalarmwindow_8h_source}{}\label{setalarmwindow_8h_source}\index{include/setalarmwindow.h@{include/setalarmwindow.h}}
+\mbox{\hyperlink{setalarmwindow_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ SETALARMWINDOW\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ SETALARMWINDOW\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QTimeEdit>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QLineEdit>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QComboBox>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_set_alarm_window_a4f6df961fdbcde25462658f0d968c9d7}{SetAlarmWindow}}\ :\ \textcolor{keyword}{public}\ QDialog\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_set_alarm_window_a4f6df961fdbcde25462658f0d968c9d7}{SetAlarmWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ signals:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_set_alarm_window_a71162b5d789bbb1505fa6122d8db3353}{alarmSet}}(QTime\ time,\ QString\ repeat,\ QString\ label,\ QString\ sound);\ \textcolor{comment}{//\ Updated\ Signal}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_set_alarm_window_aeddbecf3bde267c11f756452787e4261}{saveAlarm}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \ \ QTimeEdit\ *\mbox{\hyperlink{class_set_alarm_window_aedffed733708d28112c370ca1ed455ff}{timeEdit}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ QComboBox\ *\mbox{\hyperlink{class_set_alarm_window_a7c5373158f084a50ea051fdd15f02f72}{repeatComboBox}};\ \ }
+\DoxyCodeLine{00063\ \ \ \ \ QLineEdit\ *\mbox{\hyperlink{class_set_alarm_window_a2e00a74c64998b9300b0464b25624066}{labelEdit}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ QComboBox\ *\mbox{\hyperlink{class_set_alarm_window_a06fec663be2cc5342459a0f31c5776cd}{soundComboBox}};\ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ QPushButton\ *\mbox{\hyperlink{class_set_alarm_window_a52a67449aad57d9d8652f327819c4c54}{saveButton}};\ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ QLabel\ *\mbox{\hyperlink{class_set_alarm_window_a9431368df2fcf8dfca1fa1a1eae276ca}{errorLabel}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SETALARMWINDOW\_H}}
+
+\end{DoxyCode}
