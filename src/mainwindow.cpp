@@ -159,7 +159,7 @@ void MainWindow::checkAlarms() {
         msgBox.exec();
 
         if (msgBox.clickedButton() == snoozeButton) {
-            snoozeAlarm(i, 5);
+            snoozeAlarm(i, 1);
             stopAlarmSound();
         }
         else {
