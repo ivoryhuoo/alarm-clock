@@ -107,6 +107,7 @@ private:
     QSet<QString> dismissedToday; // Track dismissed alarms (by label + date)
     QTimer *alarmCheckTimer; /**< Timer that checks alarms every second */
     QList<bool> alarmIsSnoozed; // Boolean for snoozing an alarm
+    QVector<QTime> originalAlarmTimes; // Keep track of original alarm time set 
 };
 
 #endif // MAINWINDOW_H
