@@ -201,7 +201,7 @@ void MainWindow::checkAlarms() {
                 }
 
                 // Then snooze manually (since index i is now invalid)
-                QTime snoozedTime = currentTime.addSecs(60); // 1-minute snooze
+                QTime snoozedTime = currentTime.addSecs(300); // 5 minute snooze
                 alarms.append(snoozedTime);
                 alarmLabels.append(label + " (Snoozed)");
                 alarmRepeats.append("Never");
@@ -215,7 +215,7 @@ void MainWindow::checkAlarms() {
                 }
 
             } else {
-                snoozeAlarm(i, 1);
+                snoozeAlarm(i, 5);
                 QString uniqueKey = label + "|" + currentDate.toString("yyyy-MM-dd");
                 dismissedToday.insert(uniqueKey);
 
