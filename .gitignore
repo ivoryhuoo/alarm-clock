@@ -1,0 +1,14 @@
+# C/C++ build artifacts
+*.o
+*.obj
+*.so
+*.dylib
+*.exe
+
+# Qt MOC / rcc generated sources
+moc_*.cpp
+qrc_*.cpp
+*.moc
+
+# Qt Creator / Qt build dir
+build/

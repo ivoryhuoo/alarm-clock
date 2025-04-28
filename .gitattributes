@@ -2,3 +2,7 @@
 doxygen/** linguist-vendored
 latex/**    linguist-vendored
 *.tex       linguist-vendored
+
+# hide Makefile and QMake .pro from language stats
+Makefile       linguist-vendored
+*.pro          linguist-vendored
