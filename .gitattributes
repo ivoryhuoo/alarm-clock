@@ -1,3 +1,4 @@
-# completely hide any Doxygen folder and all .tex files
+# completely hide any Doxygen output, LaTeX sources, and .tex files
 doxygen/** linguist-vendored
-*.tex    linguist-vendored
+latex/**    linguist-vendored
+*.tex       linguist-vendored
