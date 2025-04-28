@@ -1,0 +1,3 @@
+# completely hide any Doxygen folder and all .tex files
+doxygen/** linguist-vendored
+*.tex    linguist-vendored
